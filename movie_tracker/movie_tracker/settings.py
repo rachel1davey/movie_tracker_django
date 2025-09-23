@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'tailwind',
     'theme',
+    'core',
 ]
 
 if DEBUG:
@@ -63,7 +64,7 @@ if DEBUG:
     MIDDLEWARE += [
         "django_browser_reload.middleware.BrowserReloadMiddleware",
     ]
-    
+
 ROOT_URLCONF = 'movie_tracker.urls'
 
 TEMPLATES = [
