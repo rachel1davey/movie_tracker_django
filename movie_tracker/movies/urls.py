@@ -4,5 +4,5 @@ from django.conf import settings
 from . import views
 
 urlpatterns = [
-    path('movies/<int:movie_id>', views.movie_detail, name="movie detail")
+    path('movies/<int:movie_id>/', views.movie_detail, name="movie_detail")
 ]
