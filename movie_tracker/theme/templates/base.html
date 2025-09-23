@@ -1,18 +1,29 @@
-{% load static tailwind_tags %}
-{% include "partials/sidebar.html" %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>MT | {% block title %}{% endblock title %}</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    {% tailwind_css %}
+    <title>{% block title %}Movie Tracker{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('-translate-x-full');
+        }
+    </script>
 </head>
+<body class="flex bg-gray-100 min-h-screen">
 
-<body class="bg-gray-50 text-black font-extrabold text-6xl leading-normal tracking-normal">
-{% block content %}
-{% endblock %}
+    <!-- Sidebar -->
+    {% include 'partials/sidebar.html' %}
+
+    <!-- Main content -->
+    <main class="flex-1 p-6">
+        <!-- Mobile hamburger -->
+        <button aria-label="Toggle menu" class="md:hidden mb-4 p-2 rounded bg-gray-800 text-white" onclick="toggleSidebar()">
+            ☰
+        </button>
+        {% block content %}{% endblock %}
+    </main>
+
 </body>
 </html>
