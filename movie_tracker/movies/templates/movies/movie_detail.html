@@ -8,18 +8,25 @@
 <img src="https://image.tmdb.org/t/p/w300{{ movie.poster_path }}"  alt="{{ movie.title }}">
 <p>{{movie.release_date}}</p>
 
-<form method="POST" action="">
-  <!-- CSRF token if using Django -->
-  {% csrf_token %}
-  <!-- Hidden field for the TMDB movie ID -->
-  <input type="hidden" name="movie_id" value="{{ movie.id }}">
-  <!-- Review Body -->
-  <label for="body">Your Review:</label>
-  <textarea name="body" id="body" rows="4" placeholder="Write your review here..."></textarea>
-  <!-- Rating -->
-  <label for="rating">Rating (1-5):</label>
-  <input type="number" name="rating" id="rating" min="1" max="5" value="3">
-  <!-- Submit Button -->
-  <button type="submit">Submit Review</button>
-</form>
+<h2>Reviews</h2>
+<ul>
+  {% for review in reviews %}
+    <li>
+      <strong>{{ review.author.username }}</strong> ({{ review.rating }}/10): {{ review.body }}
+    </li>
+  {% empty %}
+    <li>No reviews yet. Be the first!</li>
+  {% endfor %}
+</ul>
+
+{% if user.is_authenticated %}
+  <h3>Write a Review</h3>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+  </form>
+{% else %}
+  <p><a href="{% url 'account_login' %}">Log in</a> to write a review.</p>
+{% endif %}
 {% endblock content %}
