@@ -2,6 +2,8 @@ import requests
 from django.conf import settings 
 from django.shortcuts import render
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
+from .models import User
 
 def index(request):
     url = f"https://api.themoviedb.org/3/movie/popular?api_key={settings.TMDB_API_KEY}&language=en-US&page=1" # api url
@@ -31,3 +33,8 @@ def search_bar(request):
 
 
     return render(request, "core/results.html", {"page_obj": page_obj, "query": query}) #render, pass movies datato template
+
+
+@login_required
+def profile(request):
+    return render(request, "core/profile.html")

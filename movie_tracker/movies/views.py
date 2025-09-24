@@ -37,4 +37,10 @@ def movie_detail(request, movie_id):
     }
     return render(request, "movies/movie_detail.html", context)
 
+# add watchlist functionality
+'''
+def watchlist(request, movie_id):
+'''
+
+
     
