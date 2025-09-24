@@ -1,1 +1,10 @@
 {% extends "base.html" %}
+{% block title %}{{ movie.title }}{% endblock title %}
+{% block content %}
+<img src="https://image.tmdb.org/t/p/w300{{ movie.backdrop_path }}"  alt="{{ movie.title }}">
+
+<h1> {{movie.title}}</h1>
+<h2> {{movie.overview}} </h2>
+<img src="https://image.tmdb.org/t/p/w300{{ movie.poster_path }}"  alt="{{ movie.title }}">
+<p>{{movie.release_date}}</p>
+{% endblock content %}
