@@ -39,7 +39,7 @@ def movie_detail(request, movie_id):
 
 # add watchlist functionality
 '''
-def watchlist(request, movie_id):
+def add_to_watchlist(request, movie_id):
 '''
 
 
