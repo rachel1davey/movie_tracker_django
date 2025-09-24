@@ -1,6 +1,7 @@
 import requests
 from django.conf import settings 
 from django.shortcuts import render
+from django.core.paginator import Paginator
 
 def index(request):
     url = f"https://api.themoviedb.org/3/movie/popular?api_key={settings.TMDB_API_KEY}&language=en-US&page=1" # api url
@@ -8,7 +9,11 @@ def index(request):
     data = response.json()
     movies = data.get('results', [])
 
-    return render(request, "core/index.html", {"movies": movies})
+    page_number = request.GET.get("page", 1) # get page num from url
+    paginator = Paginator(movies, 12) # 12 movies per page
+    page_obj = paginator.get_page(page_number) #
+
+    return render(request, "core/index.html", {"page_obj": page_obj})
 
 # search functionality
 def search_bar(request):
@@ -18,4 +23,11 @@ def search_bar(request):
     data = response.json() #response in json format 
     movies = data.get('results', [])  #get results
 
-    return render(request, "core/results.html", {"movies": movies, "query": query}) #render, pass movies datato template
+    page_number = request.GET.get("page", 1) # get page num from url
+    paginator = Paginator(movies, 12) # 12 movies per page
+    page_obj = paginator.get_page(page_number) # returns requested page
+
+
+
+
+    return render(request, "core/results.html", {"page_obj": page_obj, "query": query}) #render, pass movies datato template

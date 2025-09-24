@@ -4,7 +4,7 @@
 <h2>You searched for: {{ query }}</h2>
 
 <div class="row">
-  {% for movie in movies %}
+  {% for movie in page_obj %}
     <div class="col-md-3 mb-4">
       <div class="card bg-secondary text-light h-100">
         {% if movie.poster_path %}
@@ -24,6 +24,16 @@
   {% endfor %}
 
 </div>
+<div class="pagination">
+  {% if page_obj.has_previous %}
+    <a href="?query={{ query }}&page={{ page_obj.previous_page_number }}">Previous</a>
+  {% endif %}
 
+  <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+
+  {% if page_obj.has_next %}
+    <a href="?query={{ query }}&page={{ page_obj.next_page_number }}">Next</a>
+  {% endif %}
+</div>
 
 {% endblock content %}
