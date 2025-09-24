@@ -18,15 +18,20 @@
     <li>No reviews yet. Be the first!</li>
   {% endfor %}
 </ul>
-
 {% if user.is_authenticated %}
-  <h3>Write a Review</h3>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Submit</button>
-  </form>
+  {% if user_review %}
+      <p>Your review: {{ user_review.body }}</p>
+      <button>Edit Review</button>
+      <button>Delete Review</button>
+  {% else %}
+      <form method="POST">
+          {% csrf_token %}
+          <textarea name="body"></textarea>
+          <input type="number" name="rating" min="0" max="10">
+          <button type="submit">Submit Review</button>
+      </form>
+  {% endif %}
 {% else %}
-  <p><a href="{% url 'account_login' %}">Log in</a> to write a review.</p>
+  <p><a href="{% url 'account_login' %}">Log in</a> to leave a review.</p>
 {% endif %}
 {% endblock content %}
