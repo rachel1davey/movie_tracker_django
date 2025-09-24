@@ -76,7 +76,10 @@
 ## Testing
 [Insert testing strategies, e.g., manual tests, unit tests, edge cases]  
 
+## AI Usage
+AI assisted in generating user stories and a bit of debugging.
+
 ## Credits
 - TMDb API for movie data  
 - Django documentation for guidance  
-- Tailwind CSS for styling
+- Tailwind CSS, DaisyUI for styling
