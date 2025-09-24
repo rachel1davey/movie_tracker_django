@@ -1,9 +1,10 @@
 {% extends "base.html" %}
-
+{% load static tailwind_tags %}
 {% block title %}Home{% endblock %}
 
 {% block content %}
 <h1 class="mb-4">🔥 Popular Movies</h1>
+<input class="input rounded-2xl" type="text" placeholder="Search"></input>
 
 <div class="row">
   {% for movie in movies %}
