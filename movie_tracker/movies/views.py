@@ -27,11 +27,14 @@ def movie_detail(request, movie_id):
     url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key={settings.TMDB_API_KEY}&language=en-US"
     response = requests.get(url)
     data = response.json()
+    user_review = Review.objects.filter(movie_id=movie_id, author=request.user).first()
+
 
     context = {
         "movie": data,
         "reviews": reviews,
         "form": form,
+        "user_review": user_review,
     }
     return render(request, "movies/movie_detail.html", context)
 
