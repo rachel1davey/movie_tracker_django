@@ -16,7 +16,6 @@
           <h5 class="card-title">{{ movie.title }}</h5>
           <p class="card-text">
             Release: {{ movie.release_date }} <br>
-            ⭐ {{ movie.vote_average }}/10
           </p>
         </div>
         <a class="btn-primary" href="{% url "movie_detail" movie.id %}">See more</a>
