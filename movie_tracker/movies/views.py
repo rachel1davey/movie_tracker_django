@@ -24,6 +24,11 @@ def movie_detail(request, movie_id):
         user_review = Review.objects.filter(
             movie_id=movie_id, author=request.user
         ).first()
+    
+    '''
+    ADD AVG RATING CALC HERE TO DISPLAY ON CARDS
+    rating_avg = Review.objects.filter(movie_id=movie_id)
+    '''
 
     # 3. Render template with movie and review info
     context = {
