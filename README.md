@@ -78,7 +78,8 @@
 
 ## AI Usage
 AI assisted in generating user stories and a bit of debugging.
-
+_AI generated code is very minimal / if any at all
+_
 ## Credits
 - TMDb API for movie data  
 - Django documentation for guidance  
