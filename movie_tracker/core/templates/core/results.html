@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %} {{ query }} {% endblock title %}
+{% block content %}
+<h2>You searched for: {{ query }}</h2>
+
+<div class="row">
+  {% for movie in movies %}
+    <div class="col-md-3 mb-4">
+      <div class="card bg-secondary text-light h-100">
+        {% if movie.poster_path %}
+          <img src="https://image.tmdb.org/t/p/w300{{ movie.poster_path }}" class="card-img-top" alt="{{ movie.title }}">
+        {% endif %}
+        <div class="card-body">
+          <h5 class="card-title">{{ movie.title }}</h5>
+          <p class="card-text">
+            Release: {{ movie.release_date }} <br>
+          </p>
+        </div>
+        <a class="btn-primary" href="{% url "movie_detail" movie.id %}">See more</a>
+      </div>
+    </div>
+  {% empty %}
+  <p>No results found.</p>    
+  {% endfor %}
+
+</div>
+
+
+{% endblock content %}
