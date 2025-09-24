@@ -3,6 +3,10 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
+<form method="GET" action="{% url 'core:search_bar' %}">
+  <input type="text" name="query" placeholder="Search movies...">
+  <button type="submit">Search</button>
+</form>
 <h1 class="mb-4">🔥 Popular Movies</h1>
 
 <div class="row">

@@ -1,3 +1,5 @@
+{% load account %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,16 +14,15 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-black mb-4">
         <div class="container">
             <a class="navbar-brand" href="{% url 'core:index' %}">🎬 Movie Tracker</a>
+            <a class="navbar-link" href="{% url 'account_signup' %}">Sign up</a>
+            <a class="navbar-link" href="{% url 'account_login' %}">Log In</a>
+            <a class="navbar-link" href="{% url 'account_signup' %}">My Profile</a>
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
     </nav>
-
-<form method="GET" action="{% url 'core:search_bar' %}">
-  <input type="text" name="query" placeholder="Search movies...">
-  <button type="submit">Search</button>
-</form>
 
     <!-- Content -->
     <div class="container">

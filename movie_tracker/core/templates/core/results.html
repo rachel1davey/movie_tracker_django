@@ -1,7 +1,14 @@
 {% extends "base.html" %}
 {% block title %} {{ query }} {% endblock title %}
 {% block content %}
+
+<form method="GET" action="{% url 'core:search_bar' %}">
+  <input type="text" name="query" placeholder="Search movies...">
+  <button type="submit">Search</button>
+</form>
+
 <h2>You searched for: {{ query }}</h2>
+
 
 <div class="row">
   {% for movie in page_obj %}
