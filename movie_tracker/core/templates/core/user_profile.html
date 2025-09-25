@@ -1,9 +1,15 @@
 {% extends "base.html" %}
-
+{% block title %}{{profile_user.username}}'s Profile {% endblock title %}
 {% block content %}
-<p> {{profile_user.avatar}}</p>
+
+
+<img src="{{ profile_user.avatar.url }}" alt="{{ profile_user.username }}'s avatar">
 
 <h1>{{ profile_user.username }}'s Profile</h1>
 
 <p> {{profile_user.bio}}</p>
+
+
+
+
 {% endblock %}
