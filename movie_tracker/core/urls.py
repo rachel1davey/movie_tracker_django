@@ -8,5 +8,6 @@ app_name = "core"
 urlpatterns = [
     path('', views.index, name='index'),
     path('search/', views.search_bar, name='search_bar'),
-    path('profile/', views.profile, name='profile')
+    path('profile/', views.own_profile, name='own_profile'),
+    path('profile/<str:user>', views.user_profile, name='user_profile'),
 ]

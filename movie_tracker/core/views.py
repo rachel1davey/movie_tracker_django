@@ -3,7 +3,7 @@ from django.conf import settings
 from django.shortcuts import render
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
-from .models import User
+from .models import User, Profile
 
 def index(request):
     url = f"https://api.themoviedb.org/3/movie/popular?api_key={settings.TMDB_API_KEY}&language=en-US&page=1" # api url
@@ -36,5 +36,9 @@ def search_bar(request):
 
 
 @login_required
-def profile(request):
-    return render(request, "core/profile.html")
+def own_profile(request):
+    return render(request, "core/own_profile.html")
+
+@login_required
+def user_profile(request):
+    return render(request, "core/user_profile.html")
