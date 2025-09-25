@@ -37,7 +37,8 @@ def search_bar(request):
 
 @login_required
 def own_profile(request):
-    return render(request, "core/own_profile.html")
+    profile = Profile.objects.get(user=request.user)
+    return render(request, "core/own_profile.html", {"profile": profile})
 
 @login_required
 def user_profile(request):
