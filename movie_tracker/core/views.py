@@ -40,10 +40,14 @@ def search_bar(request):
 
 @login_required
 def own_profile(request):
-    profile = Profile.objects.get(user=request.user)
+    profile, created = Profile.objects.get_or_create(user=request.user)
     return render(request, "core/own_profile.html", {"profile": profile})
 
 
 def user_profile(request, username):
     user = get_object_or_404(User, username=username)
     return render(request, "core/user_profile.html", {"profile_user": user})
+
+@login_required
+def edit_profile(request):
+    return render(request, "core/edit_profile.html")
