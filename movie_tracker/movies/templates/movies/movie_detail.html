@@ -18,7 +18,9 @@
 <ul>
   {% for review in reviews %}
     <li>
-      <strong>{{ review.author.username }}</strong> ({{ review.rating }}/10): {{ review.body }}
+              <a href="{% url 'user_profile' review.author.username %}">
+          {{ review.author.username }}
+        </a> ({{ review.rating }}/10): {{ review.body }}
     </li>
   {% empty %}
     <li>No reviews yet. Be the first!</li>
