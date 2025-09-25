@@ -47,7 +47,8 @@ def own_profile(request):
 
 def user_profile(request, username):
     user = get_object_or_404(User, username=username)
-    return render(request, "core/user_profile.html", {"profile_user": user})
+    profile = getattr(user, 'profile', None)  # get related Profile
+    return render(request, "core/user_profile.html", {"profile_user": user, "profile": profile})
 
 @login_required
 def edit_profile(request):
