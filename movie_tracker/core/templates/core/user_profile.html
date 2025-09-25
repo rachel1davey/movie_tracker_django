@@ -1,1 +1,9 @@
 {% extends "base.html" %}
+
+{% block content %}
+<p> {{profile_user.avatar}}</p>
+
+<h1>{{ profile_user.username }}'s Profile</h1>
+
+<p> {{profile_user.bio}}</p>
+{% endblock %}
