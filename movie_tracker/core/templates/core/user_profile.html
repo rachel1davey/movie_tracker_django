@@ -1,9 +1,15 @@
 {% extends "base.html" %}
+{% load static %}
+
 {% block title %}{{ profile_user.username }}'s Profile {% endblock title %}
 {% block content %}
 
 {% if profile %}
-    <img src="{{ profile.avatar.url }}" alt="{{ profile_user.username }}'s avatar">
+    {% if profile.avatar %}
+        <img src="{{ profile.avatar.url }}" alt="{{ profile_user.username }}'s avatar">
+    {% else %}
+        <img src="{% static 'images/default-avatar.png' %}" alt="Default avatar">
+    {% endif %}
     <h1>{{ profile_user.username }}'s Profile</h1>
     <p>{{ profile.bio }}</p>
 {% else %}
