@@ -3,7 +3,10 @@ from django.conf import settings
 from django.shortcuts import render
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import get_user_model
 from .models import User, Profile
+
+User = get_user_model()
 
 def index(request):
     url = f"https://api.themoviedb.org/3/movie/popular?api_key={settings.TMDB_API_KEY}&language=en-US&page=1" # api url
@@ -40,6 +43,7 @@ def own_profile(request):
     profile = Profile.objects.get(user=request.user)
     return render(request, "core/own_profile.html", {"profile": profile})
 
-@login_required
-def user_profile(request):
-    return render(request, "core/user_profile.html")
+
+def user_profile(request, username):
+    user = get_object_or_404(User, username=username)
+    return render(request, "core/user_profile.html", {"profile_user": user})
