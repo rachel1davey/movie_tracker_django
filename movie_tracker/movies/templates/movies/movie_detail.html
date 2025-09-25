@@ -33,7 +33,7 @@
       <form method="POST">
           {% csrf_token %}
           <textarea name="body"></textarea>
-          <input type="number" name="rating" min="0" max="10">
+          <input type="number" name="rating" min="0" max="5">
           <button type="submit">Submit Review</button>
       </form>
   {% endif %}
