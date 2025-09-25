@@ -1,15 +1,13 @@
 {% extends "base.html" %}
-{% block title %}{{profile_user.username}}'s Profile {% endblock title %}
+{% block title %}{{ profile_user.username }}'s Profile {% endblock title %}
 {% block content %}
 
-
-<img src="{{ profile_user.avatar.url }}" alt="{{ profile_user.username }}'s avatar">
-
-<h1>{{ profile_user.username }}'s Profile</h1>
-
-<p> {{profile_user.bio}}</p>
-
-
-
+{% if profile %}
+    <img src="{{ profile.avatar.url }}" alt="{{ profile_user.username }}'s avatar">
+    <h1>{{ profile_user.username }}'s Profile</h1>
+    <p>{{ profile.bio }}</p>
+{% else %}
+    <p>No profile available for this user.</p>
+{% endif %}
 
 {% endblock %}

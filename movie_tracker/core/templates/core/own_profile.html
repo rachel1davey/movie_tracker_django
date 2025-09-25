@@ -1,6 +1,17 @@
 {% extends "base.html" %}
 {% block title %}Your Profile{% endblock title %}
+
 {% block content %}
-<h1>Your Profile</h1>
+<h1>{{ request.user.username }}'s Profile</h1>
+
+{% if profile.avatar %}
+    <img src="{{ profile.avatar.url }}" alt="Avatar" width="150" />
+{% else %}
+    <p>No avatar yet.</p>
+{% endif %}
+
+<p><strong>Bio:</strong></p>
+<p>{{ profile.bio|default:"No bio yet." }}</p>
+
 <a href="{% url "core:edit_profile" %}">Edit Your Profile</a>
 {% endblock content %}
