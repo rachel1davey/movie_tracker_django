@@ -1,10 +1,11 @@
 import requests
 from django.conf import settings
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from .models import User, Profile
+from .forms import Profile, ProfileForm
 
 User = get_user_model()
 
@@ -50,4 +51,14 @@ def user_profile(request, username):
 
 @login_required
 def edit_profile(request):
-    return render(request, "core/edit_profile.html")
+    profile, created = Profile.objects.get_or_create(user=request.user)
+
+    if request.method == "POST":
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect("core:own_profile")  # Redirect back to profile page
+    else:
+        form = ProfileForm(instance=profile)
+
+    return render(request, "core/edit_profile.html", {"form": form})
