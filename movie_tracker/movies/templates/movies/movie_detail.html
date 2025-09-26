@@ -29,8 +29,8 @@
 {% if user.is_authenticated %}
   {% if user_review %}
       <p>Your review: {{ user_review.body }}</p>
-      <button>Edit Review</button>
-      <button>Delete Review</button>
+      <a>Edit Review</a>
+      <a>Delete Review</a>
   {% else %}
       <form method="POST">
           {% csrf_token %}
