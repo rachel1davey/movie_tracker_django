@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 STATUS_CHOICES = [
     ('plan', 'Plan to Watch'),
     ('watching', 'Watching'),
-    ('completed', 'Completed'),
+    ('completed', 'Completed'), 
 ]
 class MovieList(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
