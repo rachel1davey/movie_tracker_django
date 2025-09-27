@@ -29,8 +29,8 @@
 {% if user.is_authenticated %}
   {% if user_review %}
       <p>Your review: {{ user_review.body }}</p>
-      <a href="{% url 'edit_review' user_review.id %}">Edit Review</a>
-      <a href="{% url 'delete_review' user_review.id %}">Delete Review</a>
+      <a href="{% url 'movies:edit_review' user_review.id %}">Edit Review</a>
+      <a href="{% url 'movies:delete_review' user_review.id %}">Delete Review</a>
   {% else %}
       <form method="POST">
           {% csrf_token %}
