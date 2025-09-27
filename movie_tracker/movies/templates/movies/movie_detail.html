@@ -18,7 +18,7 @@
 <ul>
   {% for review in reviews %}
     <li>
-              <a href="{% url 'user_profile' review.author.username %}">
+              <a href="{% url 'core:user_profile' review.author.username %}">
           {{ review.author.username }}
         </a> ({{ review.rating }}/10): {{ review.body }}
     </li>
