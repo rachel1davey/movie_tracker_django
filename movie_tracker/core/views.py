@@ -1,11 +1,11 @@
-import requests
 from django.conf import settings
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
-from .models import User, Profile
-from .forms import Profile, ProfileForm
+
+from .models import Profile  
+from .forms import ProfileForm
 
 User = get_user_model()
 
