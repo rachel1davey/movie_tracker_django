@@ -8,5 +8,5 @@
     {% csrf_token %}
     <button type="submit">Yes, delete</button>
 </form>
-<a href="{% url 'movie_detail' review.movie_id %}">Cancel</a>
+<a href="{% url 'movies:movie_detail' review.movie_id %}">Cancel</a>
 {% endblock %}

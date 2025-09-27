@@ -56,7 +56,7 @@ def edit_review(request, review_id):
         form = ReviewForm(request.POST, instance=review)
         if form.is_valid():
             form.save()
-            return redirect("movie_detail", movie_id=review.movie_id)  # redirect back to movie page
+            return redirect("movies:movie_detail", movie_id=review.movie_id)  # redirect back to movie page
     else:
         form = ReviewForm(instance=review)
 
@@ -70,7 +70,7 @@ def delete_review(request, review_id):
     if request.method == "POST":  # confirm delete
         movie_id = review.movie_id
         review.delete()
-        return redirect("movie_detail", movie_id=movie_id)
+        return redirect("movies:movie_detail", movie_id=movie_id)
 
     return render(request, "movies/delete_review.html", {"review": review})
 # add watchlist functionality
