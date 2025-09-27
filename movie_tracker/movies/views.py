@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Review
 from .forms import ReviewForm
 from django.db import models
-
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -48,7 +48,31 @@ def movie_detail(request, movie_id):
     }
     return render(request, "movies/movie_detail.html", context)
 
+@login_required
+def edit_review(request, review_id):
+    review = get_object_or_404(Review, id=review_id, author=request.user)
 
+    if request.method == "POST":
+        form = ReviewForm(request.POST, instance=review)
+        if form.is_valid():
+            form.save()
+            return redirect("movie_detail", movie_id=review.movie_id)  # redirect back to movie page
+    else:
+        form = ReviewForm(instance=review)
+
+    return render(request, "movies/edit_review.html", {"form": form, "review": review})
+
+
+@login_required
+def delete_review(request, review_id):
+    review = get_object_or_404(Review, id=review_id, author=request.user)
+
+    if request.method == "POST":  # confirm delete
+        movie_id = review.movie_id
+        review.delete()
+        return redirect("movie_detail", movie_id=movie_id)
+
+    return render(request, "movies/delete_review.html", {"review": review})
 # add watchlist functionality
 '''
 def add_to_watchlist(request, movie_id):
