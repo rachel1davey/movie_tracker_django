@@ -39,6 +39,18 @@ def movie_detail(request, movie_id):
     # average rating for movie page
     avg_rating = reviews.aggregate(models.Avg("rating"))["rating__avg"]
 
+    avg_rating_name = None
+
+    if avg_rating is not None:
+        if avg_rating < 2:
+            avg_rating_name = "Mostly Negative"
+        elif avg_rating < 3:
+            avg_rating_name = "Negative"
+        elif avg_rating < 4:
+            avg_rating_name = "Positive"
+        else:
+            avg_rating_name = "Mostly Positive"
+
     context = {
         "movie": movie,
         "reviews": reviews,
@@ -59,8 +71,17 @@ def edit_review(request, review_id):
             return redirect("movies:movie_detail", movie_id=review.movie_id)  # redirect back to movie page
     else:
         form = ReviewForm(instance=review)
+    
+    context = {
+        "movie": movie,
+        "reviews": reviews,
+        "user_review": user_review,
+        "avg_rating": avg_rating,
+        "avg_rating_name": avg_rating_name,  
+        "form": form,
+    }
 
-    return render(request, "movies/edit_review.html", {"form": form, "review": review})
+    return render(request, context})
 
 
 @login_required
