@@ -56,6 +56,7 @@ def movie_detail(request, movie_id):
         "reviews": reviews,
         "user_review": user_review,
         "avg_rating": avg_rating,
+        "avg_rating_name": avg_rating_name,
         "form": form,  # pass form to template
     }
     return render(request, "movies/movie_detail.html", context)
