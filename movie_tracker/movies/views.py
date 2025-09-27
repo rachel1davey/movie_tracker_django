@@ -68,20 +68,15 @@ def edit_review(request, review_id):
         form = ReviewForm(request.POST, instance=review)
         if form.is_valid():
             form.save()
-            return redirect("movies:movie_detail", movie_id=review.movie_id)  # redirect back to movie page
+            return redirect("movies:movie_detail", movie_id=review.movie_id)
     else:
         form = ReviewForm(instance=review)
-    
-    context = {
-        "movie": movie,
-        "reviews": reviews,
-        "user_review": user_review,
-        "avg_rating": avg_rating,
-        "avg_rating_name": avg_rating_name,  
-        "form": form,
-    }
 
-    return render(request, context})
+    context = {
+        "form": form,
+        "review": review,
+    }
+    return render(request, "movies/edit_review.html", context)
 
 
 @login_required
@@ -94,7 +89,7 @@ def delete_review(request, review_id):
         return redirect("movies:movie_detail", movie_id=movie_id)
 
     return render(request, "movies/delete_review.html", {"review": review})
-# add watchlist functionality
+
 '''
 def add_to_watchlist(request, movie_id):
 '''
