@@ -21,7 +21,7 @@
             Release: {{ movie.release_date }} <br>
           </p>
         </div>
-        <a class="btn-primary" href="{% url "movie_detail" movie.id %}">See more</a>
+        <a class="btn-primary" href="{% url "movies:movie_detail" movie.id %}">See more</a>
       </div>
     </div>
   {% endfor %}
