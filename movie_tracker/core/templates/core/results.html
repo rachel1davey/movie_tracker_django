@@ -21,6 +21,13 @@
           <h5 class="card-title">{{ movie.title }}</h5>
           <p class="card-text">
             Release: {{ movie.release_date }} <br>
+          <p>Rating: 
+           {% if movie.avg_rating_name %}
+          {{ movie.avg_rating_name }}
+          {% else %}
+            No ratings yet
+         {% endif %}
+    </p>
           </p>
         </div>
         <a class="btn-primary" href="{% url "movie_detail" movie.id %}">See more</a>

@@ -20,6 +20,25 @@ def index(request):
     paginator = Paginator(movies, 12) # 12 movies per page
     page_obj = paginator.get_page(page_number) #
 
+
+    #avg_rating_name for each movie
+    for movie in movies:
+        movie_id = movie["id"]
+        reviews = Review.objects.filter(movie_id=movie_id)
+        avg_rating = reviews.aggregate(models.Avg("rating"))["rating__avg"]
+
+        if avg_rating is not None:
+            if avg_rating < 2:
+                movie["avg_rating_name"] = "Mostly Negative"
+            elif avg_rating < 3:
+                movie["avg_rating_name"] = "Negative"
+            elif avg_rating < 4:
+                movie["avg_rating_name"] = "Positive"
+            else:
+                movie["avg_rating_name"] = "Mostly Positive"
+        else:
+            movie["avg_rating_name"] = None  # no reviews yet
+
     return render(request, "core/index.html", {"page_obj": page_obj})
 
 # search functionality
