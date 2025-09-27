@@ -9,15 +9,12 @@ from django.db import models
 # Create your views here.
 
 def movie_detail(request, movie_id):
-    # 1. Fetch movie details from TMDB API
+    # fetch movie details from TMDB API
     url = f"https://api.themoviedb.org/3/movie/{movie_id}"
     params = {"api_key": settings.TMDB_API_KEY, "language": "en-US"}
     response = requests.get(url, params=params)
     
-    if response.status_code != 200:
-        movie = None  # fallback if movie not found
-    else:
-        movie = response.json()
+    movie = response.json() if response.status_code == 200 else None
     
     # get all reviews for this movie
     reviews = Review.objects.filter(movie_id=movie_id).select_related("author")
@@ -27,7 +24,19 @@ def movie_detail(request, movie_id):
     if request.user.is_authenticated:
         user_review = reviews.filter(author=request.user).first()
     
-    # average rating (optional)
+    # handle review submission
+    if request.method == "POST" and request.user.is_authenticated:
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.author = request.user
+            review.movie_id = movie_id
+            review.save()
+            return redirect("movies:movie_detail", movie_id=movie_id)
+    else:
+        form = ReviewForm()
+
+    # average rating for movie page
     avg_rating = reviews.aggregate(models.Avg("rating"))["rating__avg"]
 
     context = {
@@ -35,6 +44,7 @@ def movie_detail(request, movie_id):
         "reviews": reviews,
         "user_review": user_review,
         "avg_rating": avg_rating,
+        "form": form,  # pass form to template
     }
     return render(request, "movies/movie_detail.html", context)
 

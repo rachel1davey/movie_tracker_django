@@ -44,11 +44,13 @@ def own_profile(request):
     profile, created = Profile.objects.get_or_create(user=request.user)
     return render(request, "core/own_profile.html", {"profile": profile})
 
-
 def user_profile(request, username):
     user = get_object_or_404(User, username=username)
-    profile = getattr(user, 'profile', None)  # get related Profile
-    return render(request, "core/user_profile.html", {"profile_user": user, "profile": profile})
+    profile, created = Profile.objects.get_or_create(user=user)
+    return render(request, "core/user_profile.html", {
+        "profile_user": user,
+        "profile": profile
+    })
 
 @login_required
 def edit_profile(request):
