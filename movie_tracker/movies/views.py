@@ -18,24 +18,25 @@ def movie_detail(request, movie_id):
     else:
         movie = response.json()
     
-    # check if the user is authenticated and has a review
+    # get all reviews for this movie
+    reviews = Review.objects.filter(movie_id=movie_id).select_related("author")
+    
+    # check if the user already has a review
     user_review = None
     if request.user.is_authenticated:
-        user_review = Review.objects.filter(
-            movie_id=movie_id, author=request.user
-        ).first()
+        user_review = reviews.filter(author=request.user).first()
     
-    '''
-    ADD AVG RATING CALC HERE TO DISPLAY ON CARDS
-    rating_avg = Review.objects.filter(movie_id=movie_id)
-    '''
+    # average rating (optional)
+    avg_rating = reviews.aggregate(models.Avg("rating"))["rating__avg"]
 
-    # 3. Render template with movie and review info
     context = {
         "movie": movie,
-        "user_review": user_review
+        "reviews": reviews,
+        "user_review": user_review,
+        "avg_rating": avg_rating,
     }
     return render(request, "movies/movie_detail.html", context)
+
 
 # add watchlist functionality
 '''
