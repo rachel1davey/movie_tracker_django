@@ -3,6 +3,7 @@ from django.conf import settings
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Review
 from .forms import ReviewForm
+from django.db import models
 
 
 # Create your views here.
