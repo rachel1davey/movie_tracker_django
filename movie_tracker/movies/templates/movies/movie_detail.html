@@ -7,6 +7,11 @@
 <h2> {{movie.overview}} </h2>
 <img src="https://image.tmdb.org/t/p/w300{{ movie.poster_path }}"  alt="{{ movie.title }}">
 <p>{{movie.release_date}}</p>
+{% if avg_rating_name %}
+  <p>Rating Level: {{ avg_rating_name }}</p>
+{% else %}
+  <p>No ratings yet.</p>
+{% endif %}
 
 {% if user.is_authenticated %}
 <button>Add to my Watchlist</button>
