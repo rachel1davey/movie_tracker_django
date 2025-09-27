@@ -5,7 +5,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 import requests
 
-from .models import Profile  
+from movies.models import Review
+from django.db import models
+
+from .models import Profile
 from .forms import ProfileForm
 
 User = get_user_model()
@@ -15,11 +18,6 @@ def index(request):
     response = requests.get(url) 
     data = response.json()
     movies = data.get('results', [])
-
-    page_number = request.GET.get("page", 1) # get page num from url
-    paginator = Paginator(movies, 12) # 12 movies per page
-    page_obj = paginator.get_page(page_number) #
-
 
     #avg_rating_name for each movie
     for movie in movies:
@@ -38,6 +36,11 @@ def index(request):
                 movie["avg_rating_name"] = "Mostly Positive"
         else:
             movie["avg_rating_name"] = None  # no reviews yet
+            
+    page_number = request.GET.get("page", 1) # get page num from url
+    paginator = Paginator(movies, 12) # 12 movies per page
+    page_obj = paginator.get_page(page_number) #
+
 
     return render(request, "core/index.html", {"page_obj": page_obj})
 
