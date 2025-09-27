@@ -22,7 +22,7 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('admin/', admin.site.urls),
     path('', include('core.urls')),
-    path('movie/', include('movies.urls')) 
+    path('movie/', include('movies.urls', namespace='movies'))
 ]
 
 if settings.DEBUG:
