@@ -1,5 +1,8 @@
 {
   "name": "dummy",
   "version": "1.0.0",
-  "private": true
+  "private": true,
+  "scripts": {
+    "heroku-postbuild": "npm ci --prefix theme/static_src --include=dev && npm run --prefix theme/static_src build"
+  }
 }
