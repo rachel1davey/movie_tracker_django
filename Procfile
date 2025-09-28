@@ -1,1 +1,5 @@
-web: cd movie_tracker && ls -la && ls -la movie_tracker/ && python manage.py runserver 0.0.0.0:$PORT
+# Run Tailwind to compile CSS (Heroku will run this during build)
+release: python manage.py tailwind install && python manage.py tailwind build
+
+# Run the web server
+web: gunicorn movie_tracker.movie_tracker.wsgi --log-file -

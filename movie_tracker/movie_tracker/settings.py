@@ -30,6 +30,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['moviebucketdjango-03c8d5ee1edd.herokuapp.com',  'localhost', '127.0.0.1', '.herokuapp.com', 
 ]
 
+WSGI_APPLICATION = 'movie_tracker.wsgi.application'
 
 
 # Application definition
