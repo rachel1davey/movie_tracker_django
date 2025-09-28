@@ -63,7 +63,7 @@
       {% else %}
           <form method="POST" class="flex flex-col gap-2">
               {% csrf_token %}
-              <textarea name="body" class="border p-2 rounded text-black" placeholder="Write your review..."></textarea>
+              <textarea name="body" class="border p-2 rounded text-black resize-none" placeholder="Write your review..."></textarea>
               <input type="number" name="rating" min="0" max="5" class="border p-2 rounded w-24 text-black">
               <button type="submit" class="btn btn-primary w-32 mt-2">Submit Review</button>
           </form>
