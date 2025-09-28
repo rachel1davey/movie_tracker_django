@@ -127,18 +127,15 @@ USE_TZ = True
 # ----------------------
 # Static files
 # ----------------------
-STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / "staticfiles"
-
-# Ensure this folder exists, even if empty
-theme_static = BASE_DIR / "theme" / "static"
-theme_static.mkdir(parents=True, exist_ok=True)
-
 STATICFILES_DIRS = [
-    theme_static,
-    BASE_DIR / "static",  # fallback
+    BASE_DIR / "theme" / "static",   # Tailwind compiled CSS
+    BASE_DIR / "movie_tracker" / "static",  # fallback
 ]
 
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_URL = '/static/'
+
+# WhiteNoise for production
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # ----------------------
