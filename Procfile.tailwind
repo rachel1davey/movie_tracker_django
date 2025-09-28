@@ -1,2 +1,2 @@
-django: python manage.py runserver
-tailwind: python manage.py tailwind start
+python manage.py tailwind install
+python manage.py tailwind build
