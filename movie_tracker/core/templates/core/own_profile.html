@@ -19,23 +19,33 @@
 
 <h2 class="text-2xl font-semibold mb-4">{{ profile_user.username }}'s Reviews</h2>
 
+<hr class="my-6">
+
+<h2 class="text-2xl font-semibold mb-4 text-black">{{ profile_user.username }}'s Reviews</h2>
+
 {% if user_reviews %}
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-    {% for review in user_reviews %}
+    {% for item in user_reviews %}
+        {% with review=item.review movie=item.movie %}
         <div class="card bg-base-100 shadow-md hover:shadow-xl transition-shadow duration-300">
-            <div class="card-body">
+            {% if movie.poster_path %}
+            <figure>
+                <img src="https://image.tmdb.org/t/p/w300{{ movie.poster_path }}" alt="{{ movie.title }}" class="w-full h-48 object-cover">
+            </figure>
+            {% endif %}
+            <div class="card-body text-black">
                 <!-- Movie Title clickable -->
                 <h3 class="card-title text-lg font-bold">
                     <a href="{% url 'movies:movie_detail' review.movie_id %}" class="hover:text-primary">
-                        Movie ID: {{ review.movie_id }}
+                        {{ movie.title|default:"Unknown Title" }}
                     </a>
                 </h3>
 
                 <!-- Rating -->
                 <p><strong>Rating:</strong> {{ review.rating }}/5</p>
 
-                <!-- Comment -->
-                <p class="text-sm text-gray-700">{{ review.body|truncatewords:15 }}</p>
+                <!-- Review body -->
+                <p class="text-sm text-gray-900">{{ review.body|truncatewords:20 }}</p>
 
                 <!-- Edit/Delete for own profile -->
                 {% if request.user == profile_user %}
@@ -46,11 +56,13 @@
                 {% endif %}
             </div>
         </div>
+        {% endwith %}
     {% endfor %}
 </div>
 {% else %}
-    <p>{{ profile_user.username }} hasn't written any reviews yet.</p>
+    <p class="text-black">{{ profile_user.username }} hasn't written any reviews yet.</p>
 {% endif %}
+ 
 
 {% endblock content %}
 
