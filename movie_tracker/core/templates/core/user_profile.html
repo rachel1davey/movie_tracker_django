@@ -4,17 +4,29 @@
 {% block title %}{{ profile_user.username }}'s Profile {% endblock title %}
 {% block content %}
 
-{% if profile %}
-    {% if profile.avatar %}
-        <img src="{{ profile.avatar.url }}" alt="{{ profile_user.username }}'s avatar">
-    {% else %}
-        <img src="{% static 'images/default-avatar.png' %}" alt="Default avatar">
-    {% endif %}
-    <h1>{{ profile_user.username }}'s Profile</h1>
-    <p>{{ profile.bio }}</p>
-{% else %}
-    <p>No profile available for this user.</p>
-{% endif %}
+<div class="card bg-base-100 shadow-md hover:shadow-xl transition-shadow duration-300 p-4 flex items-center gap-4">
+    <!-- Avatar -->
+    <figure class="flex-shrink-0">
+        {% if profile.avatar %}
+            <img src="{{ profile.avatar.url }}" alt="{{ profile_user.username }}'s avatar" class="rounded-full w-24 h-24 object-cover">
+        {% else %}
+            <img src="{% static 'images/default-avatar.png' %}" alt="Default avatar" class="rounded-full w-24 h-24 object-cover">
+        {% endif %}
+    </figure>
+
+    <!-- Bio and Username -->
+    <div class="flex-1 text-black">
+        <h2 class="text-xl font-bold">{{ profile_user.username }}</h2>
+        <p class="text-gray-900 mt-1">{{ profile.bio|default:"No bio available." }}</p>
+
+        {% if request.user == profile_user %}
+            <div class="mt-3">
+                <a href="{% url 'core:edit_profile' %}" class="btn btn-sm btn-primary">Edit Profile</a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
 
 <hr class="my-6">
 
