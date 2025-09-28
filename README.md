@@ -78,7 +78,8 @@
 
 ## AI Usage
 AI assisted in generating user stories and a bit of debugging.
-_AI generated code is very minimal / if any at all
+_AI generated code is very minimal / if any at all_
+Cursor Agent used for Heroku deployment issues
 _
 ## Credits
 - TMDb API for movie data  
