@@ -64,24 +64,51 @@ def search_bar(request):
 
 @login_required
 def own_profile(request):
-    profile, created = Profile.objects.get_or_create(user=request.user)
-    # get reviews made by them
+    profile, _ = Profile.objects.get_or_create(user=request.user)
     user_reviews = Review.objects.filter(author=request.user)
+
+    reviews_with_movies = []
+    for review in user_reviews:
+        movie_data = {}
+        url = f"https://api.themoviedb.org/3/movie/{review.movie_id}"
+        params = {"api_key": settings.TMDB_API_KEY, "language": "en-US"}
+        response = requests.get(url, params=params)
+        if response.status_code == 200:
+            movie_data = response.json()
+        reviews_with_movies.append({
+            "review": review,
+            "movie": movie_data
+        })
+
     return render(request, "core/own_profile.html", {
         "profile": profile,
-        "user_reviews": user_reviews,
-        "profile_user": request.user, 
+        "user_reviews": reviews_with_movies,
+        "profile_user": request.user,
     })
+
 
 def user_profile(request, username):
     user = get_object_or_404(User, username=username)
-    profile, created = Profile.objects.get_or_create(user=user)
-    # fetch reviews from user
+    profile, _ = Profile.objects.get_or_create(user=user)
     user_reviews = Review.objects.filter(author=user)
+
+    reviews_with_movies = []
+    for review in user_reviews:
+        movie_data = {}
+        url = f"https://api.themoviedb.org/3/movie/{review.movie_id}"
+        params = {"api_key": settings.TMDB_API_KEY, "language": "en-US"}
+        response = requests.get(url, params=params)
+        if response.status_code == 200:
+            movie_data = response.json()
+        reviews_with_movies.append({
+            "review": review,
+            "movie": movie_data
+        })
+
     return render(request, "core/user_profile.html", {
         "profile_user": user,
-        "user_reviews": user_reviews,
-        "profile": profile
+        "profile": profile,
+        "user_reviews": reviews_with_movies,
     })
 
 @login_required
