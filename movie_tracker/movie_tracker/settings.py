@@ -1,34 +1,27 @@
-"""
-Django settings for movie_tracker project.
-"""
-
 from decouple import config
 from pathlib import Path
 import os
 import environ
 import dj_database_url
 
-# ------------------------------
-# Base directory
-# ------------------------------
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# ------------------------------
-# Environment variables
-# ------------------------------
+# ----------------------
+# Environment
+# ----------------------
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 SECRET_KEY = config("SECRET_KEY", default="django-insecure-fallback-key")
-DEBUG = config("DEBUG", cast=bool, default=False)
+DEBUG = config("DEBUG", cast=bool, default=True)  # Keep True locally
 
-_default_allowed_hosts = "moviebucketdjango-03c8d5ee1edd.herokuapp.com,localhost,127.0.0.1,.herokuapp.com"
+_default_allowed_hosts = "localhost,127.0.0.1,moviebucketdjango-03c8d5ee1edd.herokuapp.com,.herokuapp.com"
 ALLOWED_HOSTS = [h.strip() for h in config("ALLOWED_HOSTS", default=_default_allowed_hosts).split(",") if h.strip()]
 
-CSRF_TRUSTED_ORIGINS = [o.strip() for o in config("CSRF_TRUSTED_ORIGINS", default="https://*.herokuapp.com").split(",") if o.strip()]
+CSRF_TRUSTED_ORIGINS = [o.strip() for o in config("CSRF_TRUSTED_ORIGINS", default="http://localhost,https://*.herokuapp.com").split(",") if o.strip()]
 
-# ------------------------------
-# Installed Apps
-# ------------------------------
+# ----------------------
+# Apps
+# ----------------------
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -49,9 +42,9 @@ if DEBUG:
 
 TAILWIND_APP_NAME = 'theme'
 
-# ------------------------------
+# ----------------------
 # Middleware
-# ------------------------------
+# ----------------------
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -67,15 +60,12 @@ MIDDLEWARE = [
 if DEBUG:
     MIDDLEWARE += ["django_browser_reload.middleware.BrowserReloadMiddleware"]
 
-# ------------------------------
-# URLs and WSGI
-# ------------------------------
+# ----------------------
+# URLs and Templates
+# ----------------------
 ROOT_URLCONF = 'movie_tracker.movie_tracker.urls'
 WSGI_APPLICATION = 'movie_tracker.movie_tracker.wsgi.application'
 
-# ------------------------------
-# Templates
-# ------------------------------
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -92,9 +82,9 @@ TEMPLATES = [
     },
 ]
 
-# ------------------------------
+# ----------------------
 # Database
-# ------------------------------
+# ----------------------
 if "DATABASE_URL" in os.environ:
     DATABASES = {
         'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
@@ -107,9 +97,9 @@ else:
         }
     }
 
-# ------------------------------
-# Password validators
-# ------------------------------
+# ----------------------
+# Auth
+# ----------------------
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -117,54 +107,46 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-# ------------------------------
-# Internationalization
-# ------------------------------
-LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
-USE_I18N = True
-USE_TZ = True
-
-# ------------------------------
-# Static files
-# ------------------------------
-STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / "staticfiles"
-
-# Ensure theme/static exists so Django W004 warning disappears
-STATICFILES_DIRS = [
-    BASE_DIR / "theme" / "static",  # <-- make sure this folder exists with empty .gitkeep if needed
-]
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-# ------------------------------
-# Default primary key field type
-# ------------------------------
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# ------------------------------
-# Site and authentication
-# ------------------------------
-SITE_ID = 1
-
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
+SITE_ID = 1
 ACCOUNT_SIGNUP_FIELDS = ['email', 'username*', 'password1*', 'password2*']
 LOGIN_REDIRECT_URL = "/profile/"
 
-# ------------------------------
-# API Keys
-# ------------------------------
-TMDB_API_KEY = config("TMDB_API_KEY", default="")
+# ----------------------
+# Internationalization
+# ----------------------
+LANGUAGE_CODE = 'en-us'
+TIME_ZONE = 'UTC'
+USE_I18N = True
+USE_TZ = True
 
-# ------------------------------
-# Notes:
-# - Make sure theme/static/theme/css/dist exists with Tailwind build
-# - In production, build Tailwind in release phase:
-#   npm ci --prefix theme/static_src --include=dev && npm run --prefix theme/static_src build
-# - Then run: python manage.py collectstatic --noinput
-# ------------------------------
+# ----------------------
+# Static files
+# ----------------------
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+# Ensure this folder exists, even if empty
+theme_static = BASE_DIR / "theme" / "static"
+theme_static.mkdir(parents=True, exist_ok=True)
+
+STATICFILES_DIRS = [
+    theme_static,
+    BASE_DIR / "static",  # fallback
+]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# ----------------------
+# Primary Key
+# ----------------------
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# ----------------------
+# API Keys
+# ----------------------
+TMDB_API_KEY = config("TMDB_API_KEY", default="")
