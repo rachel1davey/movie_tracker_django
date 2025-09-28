@@ -27,12 +27,9 @@ SECRET_KEY = 'django-insecure-@yaej!nws957v^3#0%009js1gud&j#k)hg02ow+cbauzcal&os
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    'moviebucketdjango-03c8d5ee1edd.herokuapp.com',
-    'localhost',
-    '127.0.0.1',
-    '.herokuapp.com',  # This allows any Heroku subdomain
-]os.environ.setdefault("DJANGO_SETTINGS_MODULE", "movie_tracker.settings")
+ALLOWED_HOSTS = ['moviebucketdjango-03c8d5ee1edd.herokuapp.com',  'localhost', '127.0.0.1', '.herokuapp.com', 
+]
+
 
 
 # Application definition
