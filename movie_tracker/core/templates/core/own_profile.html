@@ -35,7 +35,7 @@
                 <p><strong>Rating:</strong> {{ review.rating }}/5</p>
 
                 <!-- Comment -->
-                <p class="text-sm text-gray-700">{{ review.comment|truncatewords:15 }}</p>
+                <p class="text-sm text-gray-700">{{ review.body|truncatewords:15 }}</p>
 
                 <!-- Edit/Delete for own profile -->
                 {% if request.user == profile_user %}
