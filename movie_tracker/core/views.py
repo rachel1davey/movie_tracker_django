@@ -80,6 +80,7 @@ def user_profile(request, username):
     user_reviews = Review.objects.filter(author=user)
     return render(request, "core/user_profile.html", {
         "profile_user": user,
+        "user_reviews": user_reviews,
         "profile": profile
     })
 
