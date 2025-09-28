@@ -34,7 +34,6 @@ WSGI_APPLICATION = 'movie_tracker.wsgi.application'
 
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -45,9 +44,9 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'tailwind',
-    'theme',
-    'core',
-    'movies',
+    'movie_tracker.theme',   # ← full path
+    'movie_tracker.core',
+    'movie_tracker.movies',
 ]
 
 if DEBUG:
