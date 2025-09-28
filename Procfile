@@ -1,2 +1,1 @@
-web: gunicorn --pythonpath movie_tracker movie_tracker.wsgi --log-file -
-tailwind: python movie_tracker/manage.py tailwind start
+web: cd movie_tracker && ls -la && ls -la movie_tracker/ && python manage.py runserver 0.0.0.0:$PORT
