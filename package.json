@@ -1,10 +1,11 @@
 {
   "name": "tailwind_theme",
   "version": "1.0.0",
-  "scripts": {
-    "build:css": "tailwindcss -i ./src/styles.css -o ../static/css/styles.css --minify",
-    "watch:css": "tailwindcss -i ./src/styles.css -o ../static/css/styles.css --watch"
-  },
+"scripts": {
+  "build:clean": "rm -rf ../static/css/dist",
+  "build:tailwind": "tailwindcss -i ./src/styles.css -o ../static/css/styles.css --minify",
+  "build": "npm run build:clean && npm run build:tailwind"
+},
   "devDependencies": {
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.47",
