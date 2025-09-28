@@ -1,50 +1,77 @@
 {% extends "base.html" %}
 {% block title %}{{ movie.title }}{% endblock title %}
 {% block content %}
-<img src="https://image.tmdb.org/t/p/w800{{ movie.backdrop_path }}"  alt="{{ movie.title }}">
 
-<h1> {{movie.title}}</h1>
-<h2> {{movie.overview}} </h2>
-<img src="https://image.tmdb.org/t/p/w300{{ movie.poster_path }}"  alt="{{ movie.title }}">
-<p>{{movie.release_date}}</p>
-{% if avg_rating_name %}
-  <p>Rating Level: {{ avg_rating_name }}</p>
-{% else %}
-  <p>No ratings yet.</p>
-{% endif %}
+<!--hero-->
+<div class="relative w-full h-[500px] md:h-[600px] lg:h-[700px]">
+  <img src="https://image.tmdb.org/t/p/w1280{{ movie.backdrop_path }}"  
+       alt="{{ movie.title }}"
+       class="w-full h-full object-cover brightness-50">
 
-{% if user.is_authenticated %}
-<button>Add to my Watchlist</button>
-{% else %}
-<p>Sign in to add this movie to your watchlist!</p>
-{% endif %}
+  <!-- overlay -->
+  <div class="absolute inset-0 flex flex-col justify-center items-start px-6 md:px-12 text-white">
+    <h1 class="text-3xl md:text-5xl font-bold bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent">
+      {{ movie.title }}
+    </h1>
+    <p class="mt-4 max-w-2xl text-sm md:text-lg">{{ movie.overview }}</p>
+  </div>
+</div>
 
-<h2>Reviews</h2>
-<ul>
-  {% for review in reviews %}
-    <li>
-              <a href="{% url 'core:user_profile' review.author.username %}">
+<!-- Movie Poster & Details -->
+<div class="flex flex-col md:flex-row gap-6 mt-6 px-6 md:px-12">
+  <img src="https://image.tmdb.org/t/p/w300{{ movie.poster_path }}"  
+       alt="{{ movie.title }}"
+       class="w-full md:w-64 rounded shadow-lg">
+
+  <div class="flex-1">
+    <p class="text-sm md:text-base"><strong>Release Date:</strong> {{ movie.release_date }}</p>
+    {% if avg_rating_name %}
+      <p class="text-sm md:text-base"><strong>Rating Level:</strong> {{ avg_rating_name }}</p>
+    {% else %}
+      <p>No ratings yet.</p>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+      <button class="btn btn-primary mt-4">Add to my Watchlist</button>
+    {% else %}
+      <p class="mt-4">Sign in to add this movie to your watchlist!</p>
+    {% endif %}
+  </div>
+</div>
+
+<!-- Reviews -->
+<div class="mt-12 px-6 md:px-12">
+  <h2 class="text-2xl font-bold mb-4">Reviews</h2>
+  <ul class="space-y-2">
+    {% for review in reviews %}
+      <li class="border-b border-gray-200 pb-2">
+        <a href="{% url 'core:user_profile' review.author.username %}" class="font-semibold text-blue-600">
           {{ review.author.username }}
         </a> ({{ review.rating }}/10): {{ review.body }}
-    </li>
-  {% empty %}
-    <li>No reviews yet. Be the first!</li>
-  {% endfor %}
-</ul>
-{% if user.is_authenticated %}
-  {% if user_review %}
-      <p>Your review: {{ user_review.body }}</p>
-      <a href="{% url 'movies:edit_review' user_review.id %}">Edit Review</a>
-      <a href="{% url 'movies:delete_review' user_review.id %}">Delete Review</a>
+      </li>
+    {% empty %}
+      <li>No reviews yet. Be the first!</li>
+    {% endfor %}
+  </ul>
+
+  {% if user.is_authenticated %}
+    <div class="mt-6">
+      {% if user_review %}
+          <p>Your review: {{ user_review.body }}</p>
+          <a href="{% url 'movies:edit_review' user_review.id %}" class="text-blue-600 mr-4">Edit Review</a>
+          <a href="{% url 'movies:delete_review' user_review.id %}" class="text-red-600">Delete Review</a>
+      {% else %}
+          <form method="POST" class="flex flex-col gap-2">
+              {% csrf_token %}
+              <textarea name="body" class="border p-2 rounded" placeholder="Write your review..."></textarea>
+              <input type="number" name="rating" min="0" max="5" class="border p-2 rounded w-24">
+              <button type="submit" class="btn btn-primary w-32 mt-2">Submit Review</button>
+          </form>
+      {% endif %}
+    </div>
   {% else %}
-      <form method="POST">
-          {% csrf_token %}
-          <textarea name="body"></textarea>
-          <input type="number" name="rating" min="0" max="5">
-          <button type="submit">Submit Review</button>
-      </form>
+    <p class="mt-4"><a href="{% url 'account_login' %}" class="text-blue-600">Log in</a> to leave a review.</p>
   {% endif %}
-{% else %}
-  <p><a href="{% url 'account_login' %}">Log in</a> to leave a review.</p>
-{% endif %}
+</div>
+
 {% endblock content %}
