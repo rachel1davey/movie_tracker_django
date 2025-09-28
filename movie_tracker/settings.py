@@ -28,6 +28,7 @@ SECRET_KEY = 'django-insecure-@yaej!nws957v^3#0%009js1gud&j#k)hg02ow+cbauzcal&os
 DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', 'https://moviebucketdjango-03c8d5ee1edd.herokuapp.com/', '127.0.0.1']
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "movie_tracker.settings")
 
 
 # Application definition
