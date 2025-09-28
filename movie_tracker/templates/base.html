@@ -1,5 +1,5 @@
 {% load account %}
-{% load tailwind_tags %}
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -7,8 +7,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %} | MB </title>
-    {% tailwind_preload_css %}
-    {% tailwind_css %}
+    <link rel="preload" href="{% static 'css/dist/styles.css' %}" as="style">
+    <link rel="stylesheet" href="{% static 'css/dist/styles.css' %}">
 </head>
 <body class="relative min-h-screen bg-[#020617] text-white">
 
