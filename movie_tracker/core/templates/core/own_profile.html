@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% load static %}
+
 {% block title %}Your Profile{% endblock title %}
 
 {% block content %}
@@ -44,7 +46,7 @@
                 <img src="https://image.tmdb.org/t/p/w300{{ movie.poster_path }}" alt="{{ movie.title }}" class="w-full h-48 object-cover">
             </figure>
             {% endif %}
-            <div class="card-body text-white">
+            <div class="card-body text-black">
                 <!-- Movie Title clickable -->
                 <h3 class="card-title text-lg font-bold">
                     <a href="{% url 'movies:movie_detail' review.movie_id %}" class="hover:text-primary">
