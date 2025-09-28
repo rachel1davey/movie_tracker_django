@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'movie_tracker.movies',
 ]
 
-if DEBUG:
+RUN_BROWSER_RELOAD = config("RUN_BROWSER_RELOAD", cast=bool, default=False)
+
+if DEBUG and RUN_BROWSER_RELOAD:
     INSTALLED_APPS += ['django_browser_reload']
     MIDDLEWARE += ["django_browser_reload.middleware.BrowserReloadMiddleware"]
 
