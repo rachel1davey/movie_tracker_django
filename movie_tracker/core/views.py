@@ -65,11 +65,19 @@ def search_bar(request):
 @login_required
 def own_profile(request):
     profile, created = Profile.objects.get_or_create(user=request.user)
-    return render(request, "core/own_profile.html", {"profile": profile})
+    # get reviews made by them
+    user_reviews = Review.objects.filter(author=request.user)
+    return render(request, "core/own_profile.html", {
+        "profile": profile,
+        "user_reviews": user_reviews,
+        "profile_user": request.user, 
+    })
 
 def user_profile(request, username):
     user = get_object_or_404(User, username=username)
     profile, created = Profile.objects.get_or_create(user=user)
+    # fetch reviews from user
+    user_reviews = Review.objects.filter(author=user)
     return render(request, "core/user_profile.html", {
         "profile_user": user,
         "profile": profile
