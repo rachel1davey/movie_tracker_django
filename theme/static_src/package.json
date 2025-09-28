@@ -5,9 +5,9 @@
   "scripts": {
     "start": "npm run dev",
     "build": "npm run build:prepare && npm run build:tailwind",
-    "build:prepare": "node -e \"const fs=require('fs');const p=require('path');const d=p.resolve(__dirname,'../static/css/dist');fs.rmSync(d,{recursive:true,force:true});fs.mkdirSync(d,{recursive:true});\"",
-    "build:tailwind": "NODE_ENV=production postcss ./src/styles.css -o ../static/css/dist/styles.css --minify",
-    "dev": "NODE_ENV=development postcss ./src/styles.css -o ../static/css/dist/styles.css --watch"
+    "build:prepare": "node -e \"const fs=require('fs');const p=require('path');const d=p.resolve(__dirname,'../static/theme/css/dist');fs.rmSync(d,{recursive:true,force:true});fs.mkdirSync(d,{recursive:true});\"",
+    "build:tailwind": "NODE_ENV=production postcss ./src/styles.css -o ../static/theme/css/dist/styles.css --minify",
+    "dev": "NODE_ENV=development postcss ./src/styles.css -o ../static/theme/css/dist/styles.css --watch"
   },
   "keywords": [],
   "author": "",
