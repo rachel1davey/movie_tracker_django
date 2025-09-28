@@ -17,7 +17,15 @@
             <a href="/" class="text-xl font-bold">MB</a>
 
             <div class="flex items-center gap-4">
-                <input type="text" placeholder="Search" class="input input-sm input-bordered" />
+                <form method="GET" action="{% url 'core:search_bar' %}" class="flex items-center gap-2">
+                  <input
+                  type="text"
+                   name="query"
+                   placeholder="Search movies..."
+                   class="input input-sm input-bordered"
+                  value="{{ request.GET.query }}">
+                  <button type="submit" class="btn btn-sm btn-secondary">Search</button>
+                </form>
 
                 {% if user.is_authenticated %}
                 <div class="dropdown dropdown-end">

@@ -1,44 +1,47 @@
 {% extends "base.html" %}
 {% block title %} {{ query }} {% endblock title %}
 {% block content %}
+<div class="container mx-auto px-0.5">
+<h1 class="mb-4">You searched for: {{ query }}</h1>
 
-<form method="GET" action="{% url 'core:search_bar' %}">
-  <input type="text" name="query" placeholder="Search movies...">
-  <button type="submit">Search</button>
-</form>
-
-<h2>You searched for: {{ query }}</h2>
-
-
-<div class="row">
+<!-- reponsive grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
   {% for movie in page_obj %}
-    <div class="col-md-3 mb-4">
-      <div class="card bg-secondary text-light h-100">
-        {% if movie.poster_path %}
-          <img src="https://image.tmdb.org/t/p/w300{{ movie.poster_path }}" class="card-img-top" alt="{{ movie.title }}">
-        {% endif %}
-        <div class="card-body">
-          <h5 class="card-title">{{ movie.title }}</h5>
-          <p class="card-text">
-            Release: {{ movie.release_date }} <br>
-          <p>Rating: 
-           {% if movie.avg_rating_name %}
+<div class="card bg-base-100 image-full w-full h-[500px] shadow-sm">
+  <figure>
+    <img src="https://image.tmdb.org/t/p/w300{{ movie.poster_path }}"
+         alt="{{ movie.title }}"
+         class="w-full h-full object-cover">
+  </figure>
+
+  <!-- makes card-body a vertical flex container -->
+  <div class="card-body flex flex-col">
+    <h5 class="card-title">{{ movie.title }}</h5>
+
+    <!-- spacer pushes the next section to the bottom -->
+    <div class="flex-grow"></div>
+
+    <!--rating on left, button on right -->
+    <div class="flex justify-between items-center w-full">
+      <p class="text-sm opacity-80">
+        Rating:
+        {% if movie.avg_rating_name %}
           {{ movie.avg_rating_name }}
-          {% else %}
-            No ratings yet
-         {% endif %}
-    </p>
-          </p>
-        </div>
-        <a class="btn-primary" href="{% url "movie_detail" movie.id %}">See more</a>
+        {% else %}
+          No ratings yet
+        {% endif %}
+      </p>
+      <div class="card-actions">
+        <a class="btn btn-primary" href="{% url "movies:movie_detail" movie.id %}">
+          See more
+        </a>
       </div>
     </div>
-  {% empty %}
-  <p>No results found.</p>    
+  </div>
+</div>
   {% endfor %}
 
-</div>
-<div class="pagination">
+  <div class="pagination">
   {% if page_obj.has_previous %}
     <a href="?query={{ query }}&page={{ page_obj.previous_page_number }}">Previous</a>
   {% endif %}
@@ -48,6 +51,9 @@
   {% if page_obj.has_next %}
     <a href="?query={{ query }}&page={{ page_obj.next_page_number }}">Next</a>
   {% endif %}
+</div>
+
+</div>
 </div>
 
 {% endblock content %}
