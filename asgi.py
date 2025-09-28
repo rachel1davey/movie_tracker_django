@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.2/howto/deployment/asgi/
 
 import os
 import sys
-sys.path.append(os.path.join(os.path.dirname(__file__), 'movie_tracker'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'movie_tracker'))
 
 
 from django.core.asgi import get_asgi_application
