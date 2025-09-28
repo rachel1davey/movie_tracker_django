@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Chatroom{% endblock title %}
+
+{% block content %}
+<div id="chat-box" class="border h-64 overflow-y-auto">
+    {% for msg in messages %}
+        <p><strong>{{ msg.user.username }}:</strong> {{ msg.text }}</p>
+    {% endfor %}
+</div>
+
+<input type="text" id="chat-input" placeholder="Type a message...">
+<button id="send-btn">Send</button>
+
+<script>
+function fetchMessages() {
+    fetch("{% url 'fetch_messages' %}")
+    .then(res => res.json())
+    .then(data => {
+        const chatBox = document.getElementById('chat-box');
+        chatBox.innerHTML = '';
+        data.forEach(msg => {
+            chatBox.innerHTML += `<p><strong>${msg.user}:</strong> ${msg.text}</p>`;
+        });
+        chatBox.scrollTop = chatBox.scrollHeight;
+    });
+}
+
+// Fetch every 3 seconds
+setInterval(fetchMessages, 3000);
+
+document.getElementById('send-btn').onclick = () => {
+    const input = document.getElementById('chat-input');
+    fetch("{% url 'send_message' %}", {
+        method: 'POST',
+        headers: {'X-CSRFToken': '{{ csrf_token }}', 'Content-Type': 'application/x-www-form-urlencoded'},
+        body: `text=${encodeURIComponent(input.value)}`
+    }).then(() => { input.value = ''; fetchMessages(); });
+};
+</script>
+
+{% endblock content %}
