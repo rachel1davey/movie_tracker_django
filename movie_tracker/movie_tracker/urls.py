@@ -21,6 +21,7 @@ from django.conf import settings
 urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('admin/', admin.site.urls),
+    path('', include('movie_tracker.chat.urls')),
     path('', include('movie_tracker.core.urls')),
     path('movie/', include('movie_tracker.movies.urls', namespace='movies'))
 ]
