@@ -4,9 +4,11 @@
 
 {% block content %}
 
+<div class="container mx-auto px-0.5">
 <h1 class="mb-4">🔥 Popular Movies</h1>
 
-<div class="grid grid-cols-4 gap-4">
+<!-- reponsive grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
   {% for movie in page_obj %}
 <div class="card bg-base-100 image-full w-full h-[500px] shadow-sm">
   <figure>
@@ -25,7 +27,7 @@
 
     <!--rating on left, button on right -->
     <div class="flex justify-between items-center w-full">
-      <p class="text-sm">
+      <p class="text-sm opacity-80">
         Rating:
         {% if movie.avg_rating_name %}
           {{ movie.avg_rating_name }}
@@ -55,5 +57,6 @@
   {% endif %}
 </div>
 
+</div>
 </div>
 {% endblock %}
