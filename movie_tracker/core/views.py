@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 import requests
 
-from movies.models import Review
+from movie_tracker.movies.models import Review
 from django.db import models
 
 from .models import Profile
