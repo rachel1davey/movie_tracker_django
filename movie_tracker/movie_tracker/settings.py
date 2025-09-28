@@ -157,14 +157,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+# Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
 
+# Add theme/static to match Tailwind output
 STATICFILES_DIRS = [
-    BASE_DIR / "static",  # points to /app/movie_tracker/static
+    BASE_DIR / "theme" / "static",
 ]
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
-
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
