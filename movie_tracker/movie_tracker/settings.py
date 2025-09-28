@@ -158,10 +158,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
 STATICFILES_DIRS = [
-    BASE_DIR / "theme" / "static",  # your Tailwind output folder
+    BASE_DIR / "static",  # points to /app/movie_tracker/static
 ]
-STATIC_ROOT = BASE_DIR / "staticfiles"  # where collectstatic will gather files
+
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
