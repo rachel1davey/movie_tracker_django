@@ -12,12 +12,24 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 SECRET_KEY = config("SECRET_KEY", default="django-insecure-fallback-key")
-DEBUG = config("DEBUG", cast=bool, default=False)  # Keep True locally
+DEBUG = config("DEBUG", cast=bool, default=False)  # False in production
 
+# Allowed hosts
 _default_allowed_hosts = "localhost,127.0.0.1,moviebucketdjango-03c8d5ee1edd.herokuapp.com,.herokuapp.com"
-ALLOWED_HOSTS = [h.strip() for h in config("ALLOWED_HOSTS", default=_default_allowed_hosts).split(",") if h.strip()]
+ALLOWED_HOSTS = [
+    h.strip()
+    for h in config("ALLOWED_HOSTS", default=_default_allowed_hosts).split(",")
+    if h.strip()
+]
 
-CSRF_TRUSTED_ORIGINS = [o.strip() for o in config("CSRF_TRUSTED_ORIGINS", default="http://localhost,https://*.herokuapp.com").split(",") if o.strip()]
+CSRF_TRUSTED_ORIGINS = [
+    o.strip()
+    for o in config(
+        "CSRF_TRUSTED_ORIGINS",
+        default="http://localhost,https://*.herokuapp.com"
+    ).split(",")
+    if o.strip()
+]
 
 # ----------------------
 # Apps
@@ -37,12 +49,10 @@ INSTALLED_APPS = [
     'movie_tracker.movies',
 ]
 
+# Only enable django-browser-reload locally
 RUN_BROWSER_RELOAD = config("RUN_BROWSER_RELOAD", cast=bool, default=False)
-
 if DEBUG and RUN_BROWSER_RELOAD:
     INSTALLED_APPS += ['django_browser_reload']
-    MIDDLEWARE += ["django_browser_reload.middleware.BrowserReloadMiddleware"]
-
 
 TAILWIND_APP_NAME = 'theme'
 
@@ -61,7 +71,8 @@ MIDDLEWARE = [
     "allauth.account.middleware.AccountMiddleware",
 ]
 
-if DEBUG:
+# Only include browser reload middleware locally
+if DEBUG and RUN_BROWSER_RELOAD:
     MIDDLEWARE += ["django_browser_reload.middleware.BrowserReloadMiddleware"]
 
 # ----------------------
@@ -132,14 +143,12 @@ USE_TZ = True
 # Static files
 # ----------------------
 STATICFILES_DIRS = [
-    BASE_DIR / "theme" / "static",   # Tailwind compiled CSS
-    BASE_DIR / "movie_tracker" / "static",  # fallback
+    BASE_DIR / "theme" / "static",             # Tailwind compiled CSS
+    BASE_DIR / "movie_tracker" / "static",     # fallback
 ]
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATIC_URL = '/static/'
-
-# WhiteNoise for production
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # ----------------------
