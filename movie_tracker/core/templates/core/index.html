@@ -8,32 +8,39 @@
 
 <div class="grid grid-cols-4 gap-4">
   {% for movie in page_obj %}
-      <div class="card shadow-sm image-full bg-base-100">
-        {% if movie.poster_path %}
-        <figure>
-          <img src="https://image.tmdb.org/t/p/w300{{ movie.poster_path }}" class="card-img-top" alt="{{ movie.title }}">
-        </figure>
+<div class="card bg-base-100 image-full w-full h-[500px] shadow-sm">
+  <figure>
+    <img src="https://image.tmdb.org/t/p/w300{{ movie.poster_path }}"
+         alt="{{ movie.title }}"
+         class="w-full h-full object-cover">
+  </figure>
+
+  <!-- makes card-body a vertical flex container -->
+  <div class="card-body flex flex-col">
+    <h5 class="card-title">{{ movie.title }}</h5>
+    <p>Release: {{ movie.release_date }}</p>
+
+    <!-- spacer pushes the next section to the bottom -->
+    <div class="flex-grow"></div>
+
+    <!--rating on left, button on right -->
+    <div class="flex justify-between items-center w-full">
+      <p class="text-sm">
+        Rating:
+        {% if movie.avg_rating_name %}
+          {{ movie.avg_rating_name }}
         {% else %}
-        <figure>
-        <img> <!-- placeholder-->
-        </figure>
+          No ratings yet
         {% endif %}
-        <div class="card-body flex flex-col flex-grow">
-          <h5 class="card-title">{{ movie.title }}</h5>
-          <p class="card-text">
-            Release: {{ movie.release_date }} <br>
-              <p>Rating: 
-      {% if movie.avg_rating_name %}
-        {{ movie.avg_rating_name }}
-      {% else %}
-        No ratings yet
-      {% endif %}
-    </p>
-        </div>
-        <div class="justify-end card-actions mt-auto">
-        <a class="btn btn-primary" href="{% url "movies:movie_detail" movie.id %}">See more</a>
-        </div>
+      </p>
+      <div class="card-actions">
+        <a class="btn btn-primary" href="{% url "movies:movie_detail" movie.id %}">
+          See more
+        </a>
       </div>
+    </div>
+  </div>
+</div>
   {% endfor %}
 
   <div class="pagination">
