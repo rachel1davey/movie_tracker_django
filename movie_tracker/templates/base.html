@@ -10,11 +10,16 @@
     {% tailwind_preload_css %}
     {% tailwind_css %}
 </head>
-<body class="text-base-content min-h-screen flex flex-col">
+<body class="relative min-h-screen flex flex-col">
 
-    <nav class="bg-primary text-primary-content shadow-md">
+    <!-- Radial gradient background -->
+    <div class="fixed inset-0 -z-10 pointer-events-none"
+         style="background: radial-gradient(125% 125% at 50% 10%, #fff 40%, #63e 100%);">
+    </div>
+
+    <nav class="glass text-primary-content shadow-md">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="/" class="text-xl font-bold">MB</a>
+            <a href="/" class="text-xl font-bold">moviebucket</a>
 
             <div class="flex items-center gap-4">
                 <form method="GET" action="{% url 'core:search_bar' %}" class="flex items-center gap-2">
@@ -34,7 +39,7 @@
                             <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" alt="User Avatar" />
                         </div>
                     </label>
-                    <ul tabindex="0" class="menu menu-sm dropdown-content bg-primary text-primary-content rounded-box mt-3 w-40 p-2 shadow">
+                    <ul tabindex="0" class="menu menu-sm dropdown-content glass text-primary-content rounded-box mt-3 w-40 p-2 shadow">
                         <li><a href="{% url 'core:own_profile' %}">Profile</a></li>
                         <li><a href="{% url 'account_logout' %}">Logout</a></li>
                     </ul>
@@ -50,7 +55,7 @@
         {% block content %}{% endblock %}
     </main>
 
-    <footer class="bg-primary text-primary-content py-6 mt-auto">
+    <footer class="glass text-primary-content py-6 mt-auto">
         <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
             <p class="text-sm">&copy; 2025 MovieBucket. All rights reserved.</p>
             <div class="flex gap-4 mt-2 md:mt-0">
