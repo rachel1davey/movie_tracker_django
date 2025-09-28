@@ -28,10 +28,13 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = 'django-insecure-@yaej!nws957v^3#0%009js1gud&j#k)hg02ow+cbauzcal&os'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config("DEBUG", cast=bool, default=False)
 
-ALLOWED_HOSTS = ['moviebucketdjango-03c8d5ee1edd.herokuapp.com',  'localhost', '127.0.0.1', '.herokuapp.com', 
-]
+_default_allowed_hosts = "moviebucketdjango-03c8d5ee1edd.herokuapp.com,localhost,127.0.0.1,.herokuapp.com"
+ALLOWED_HOSTS = [h.strip() for h in config("ALLOWED_HOSTS", default=_default_allowed_hosts).split(",") if h.strip()]
+
+# Trust Heroku domains for CSRF by default; override via env if needed
+CSRF_TRUSTED_ORIGINS = [o.strip() for o in config("CSRF_TRUSTED_ORIGINS", default="https://*.herokuapp.com").split(",") if o.strip()]
 
 WSGI_APPLICATION = 'movie_tracker.wsgi.application'
 
@@ -61,6 +64,7 @@ TAILWIND_APP_NAME = 'theme'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -105,15 +109,12 @@ WSGI_APPLICATION = 'movie_tracker.wsgi.application'
 TMDB_API_KEY = config("TMDB_API_KEY")
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-# Database
 
-if "DATABASE_URL" in os.environ and os.environ.get("ENV") == "PRODUCTION":
-    print("using Postgres")
+if "DATABASE_URL" in os.environ:
     DATABASES = {
-        'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+        'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
     }
 else:
-    print("using SQLite3")
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -156,7 +157,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR.parent / 'staticfiles'
+STATICFILES_DIRS = [BASE_DIR.parent / 'static']
+
+# WhiteNoise configuration for serving static files efficiently
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Heroku: ensure request.is_secure works correctly behind proxy
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
