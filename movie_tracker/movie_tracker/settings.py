@@ -12,7 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 SECRET_KEY = config("SECRET_KEY", default="django-insecure-fallback-key")
-DEBUG = config("DEBUG", cast=bool, default=True)  # Keep True locally
+DEBUG = config("DEBUG", cast=bool, default=False)  # Keep True locally
 
 _default_allowed_hosts = "localhost,127.0.0.1,moviebucketdjango-03c8d5ee1edd.herokuapp.com,.herokuapp.com"
 ALLOWED_HOSTS = [h.strip() for h in config("ALLOWED_HOSTS", default=_default_allowed_hosts).split(",") if h.strip()]
@@ -39,6 +39,8 @@ INSTALLED_APPS = [
 
 if DEBUG:
     INSTALLED_APPS += ['django_browser_reload']
+    MIDDLEWARE += ["django_browser_reload.middleware.BrowserReloadMiddleware"]
+
 
 TAILWIND_APP_NAME = 'theme'
 
