@@ -1,0 +1,13 @@
+{
+  "name": "tailwind_theme",
+  "version": "1.0.0",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/styles.css -o ../static/css/styles.css --minify",
+    "watch:css": "tailwindcss -i ./src/styles.css -o ../static/css/styles.css --watch"
+  },
+  "devDependencies": {
+    "autoprefixer": "^11.8.0",
+    "postcss": "^8.4.14",
+    "tailwindcss": "^3.3.2"
+  }
+}
