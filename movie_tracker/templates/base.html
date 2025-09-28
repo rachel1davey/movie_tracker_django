@@ -10,7 +10,7 @@
     {% tailwind_preload_css %}
     {% tailwind_css %}
 </head>
-<body class="bg-base-200 text-base-content min-h-screen flex flex-col">
+<body class="text-base-content min-h-screen flex flex-col">
 
     <nav class="bg-primary text-primary-content shadow-md">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
@@ -35,7 +35,7 @@
                         </div>
                     </label>
                     <ul tabindex="0" class="menu menu-sm dropdown-content bg-primary text-primary-content rounded-box mt-3 w-40 p-2 shadow">
-                        <li><a href="{% url 'account_profile' %}">Profile</a></li>
+                        <li><a href="{% url 'core:own_profile' %}">Profile</a></li>
                         <li><a href="{% url 'account_logout' %}">Logout</a></li>
                     </ul>
                 </div>
