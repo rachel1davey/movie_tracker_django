@@ -8,7 +8,7 @@
 
 <div class="grid grid-cols-4 gap-4">
   {% for movie in page_obj %}
-      <div class="card bg-secondary shadow-sm image-full">
+      <div class="card shadow-sm image-full bg-base-100">
         {% if movie.poster_path %}
         <figure>
           <img src="https://image.tmdb.org/t/p/w300{{ movie.poster_path }}" class="card-img-top" alt="{{ movie.title }}">
@@ -18,7 +18,7 @@
         <img> <!-- placeholder-->
         </figure>
         {% endif %}
-        <div class="card-body">
+        <div class="card-body flex flex-col flex-grow">
           <h5 class="card-title">{{ movie.title }}</h5>
           <p class="card-text">
             Release: {{ movie.release_date }} <br>
@@ -30,7 +30,7 @@
       {% endif %}
     </p>
         </div>
-        <div class="justify-end card-actions">
+        <div class="justify-end card-actions mt-auto">
         <a class="btn btn-primary" href="{% url "movies:movie_detail" movie.id %}">See more</a>
         </div>
       </div>
