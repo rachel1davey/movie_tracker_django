@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'tailwind',
-    'theme',   # ← full path
+    'theme',
     'core',
     'movies',
 ]
