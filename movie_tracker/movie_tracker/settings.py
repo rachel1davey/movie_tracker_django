@@ -48,8 +48,8 @@ INSTALLED_APPS = [
     'allauth.account',
     'tailwind',
     'theme',
-    'movie_tracker.core',
-    'movie_tracker.movies',
+    'core',
+    'movies',
 ]
 
 if DEBUG:
