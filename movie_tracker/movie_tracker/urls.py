@@ -21,8 +21,8 @@ from django.conf import settings
 urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('admin/', admin.site.urls),
-    path('', include('core.urls')),
-    path('movie/', include('movies.urls', namespace='movies'))
+    path('', include('movie_tracker.core.urls')),
+    path('movie/', include('movie_tracker.movies.urls', namespace='movies'))
 ]
 
 if settings.DEBUG:

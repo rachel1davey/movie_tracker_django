@@ -36,7 +36,7 @@ ALLOWED_HOSTS = [h.strip() for h in config("ALLOWED_HOSTS", default=_default_all
 # Trust Heroku domains for CSRF by default; override via env if needed
 CSRF_TRUSTED_ORIGINS = [o.strip() for o in config("CSRF_TRUSTED_ORIGINS", default="https://*.herokuapp.com").split(",") if o.strip()]
 
-WSGI_APPLICATION = 'movie_tracker.wsgi.application'
+WSGI_APPLICATION = 'movie_tracker.movie_tracker.wsgi.application'
 
 
 # Application definition
@@ -51,8 +51,8 @@ INSTALLED_APPS = [
     'allauth.account',
     'tailwind',
     'theme',
-    'core',
-    'movies',
+    'movie_tracker.core',
+    'movie_tracker.movies',
 ]
 
 if DEBUG:
@@ -84,7 +84,7 @@ if DEBUG:
         "django_browser_reload.middleware.BrowserReloadMiddleware",
     ]
 
-ROOT_URLCONF = 'movie_tracker.urls'
+ROOT_URLCONF = 'movie_tracker.movie_tracker.urls'
 
 TEMPLATES = [
     {
@@ -102,7 +102,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'movie_tracker.wsgi.application'
+WSGI_APPLICATION = 'movie_tracker.movie_tracker.wsgi.application'
 
 
 TMDB_API_KEY = config("TMDB_API_KEY")
