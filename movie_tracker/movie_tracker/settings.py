@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-@yaej!nws957v^3#0%009js1gud&j#k)hg02ow+cbauzcal&os
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 'https://moviebucketdjango-03c8d5ee1edd.herokuapp.com/']
+ALLOWED_HOSTS = ['localhost', 'https://moviebucketdjango-03c8d5ee1edd.herokuapp.com/', '127.0.0.1']
 
 
 # Application definition
