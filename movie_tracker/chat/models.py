@@ -8,4 +8,4 @@ class Message(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.user.username}: {self.text[:20]}"
+        return f"{self.user.username}: {self.text[:500]}"
