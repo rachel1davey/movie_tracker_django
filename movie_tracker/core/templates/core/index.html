@@ -6,14 +6,17 @@
 
 <h1 class="mb-4">🔥 Popular Movies</h1>
 
-<div class="row">
+<div class="grid grid-cols-4 gap-4">
   {% for movie in page_obj %}
-    <div class="col-md-3 mb-4">
-      <div class="card bg-secondary text-light h-100">
+      <div class="card bg-secondary shadow-sm image-full">
         {% if movie.poster_path %}
+        <figure>
           <img src="https://image.tmdb.org/t/p/w300{{ movie.poster_path }}" class="card-img-top" alt="{{ movie.title }}">
+        </figure>
         {% else %}
+        <figure>
         <img> <!-- placeholder-->
+        </figure>
         {% endif %}
         <div class="card-body">
           <h5 class="card-title">{{ movie.title }}</h5>
@@ -27,9 +30,10 @@
       {% endif %}
     </p>
         </div>
-        <a class="btn-primary" href="{% url "movies:movie_detail" movie.id %}">See more</a>
+        <div class="justify-end card-actions">
+        <a class="btn btn-primary" href="{% url "movies:movie_detail" movie.id %}">See more</a>
+        </div>
       </div>
-    </div>
   {% endfor %}
 
   <div class="pagination">
