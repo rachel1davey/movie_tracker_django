@@ -20,7 +20,7 @@ class MovieList(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
     bio = models.TextField()
-    avatar = cloud('Image', null=True, blank=True)
+    avatar = CloudinaryField('Image', null=True, blank=True)
 
     def __str__(self):
         return f"{self.user}"
