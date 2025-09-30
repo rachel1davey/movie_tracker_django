@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'theme',
     'movie_tracker.core',
     'movie_tracker.movies',
-    'movie_tracker.chat'
 ]
 
 # Only enable django-browser-reload locally

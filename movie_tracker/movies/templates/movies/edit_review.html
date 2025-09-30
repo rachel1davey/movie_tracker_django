@@ -2,7 +2,7 @@
 {% block title %}Edit Review{% endblock %}
 {% block content %}
 <h2>Edit Your Review</h2>
-<form method="POST">
+<form method="POST" class="text-white">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Save Changes</button>
