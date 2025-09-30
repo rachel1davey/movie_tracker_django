@@ -12,7 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 SECRET_KEY = config("SECRET_KEY", default="django-insecure-fallback-key")
-DEBUG = config("DEBUG", cast=bool, default=False)  # False in production
+DEBUG = config("DEBUG", cast=bool, default=True)  # False in production
 
 # Allowed hosts
 _default_allowed_hosts = "localhost,127.0.0.1,moviebucketdjango-03c8d5ee1edd.herokuapp.com,.herokuapp.com"
@@ -93,7 +93,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                "core.context_processors.user_profile",
+                "movie_tracker.core.context_processors.user_profile",
             ],
         },
     },
@@ -162,3 +162,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # API Keys
 # ----------------------
 TMDB_API_KEY = config("TMDB_API_KEY", default="")
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
