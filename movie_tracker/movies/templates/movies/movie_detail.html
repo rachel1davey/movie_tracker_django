@@ -46,7 +46,7 @@
     {% for review in reviews %}
       <li class="flex items-start border-b border-gray-200 pb-4">
         <!-- Avatar -->
-        <img src="{{ navbar_profile.avatar.url }}" 
+        <img src="{{ review.author.avatar.url }}" 
              alt="{{ review.author.username }}’s avatar" 
              class="w-12 h-12 rounded-full mr-4 object-cover">
 
