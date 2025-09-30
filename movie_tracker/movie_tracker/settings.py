@@ -12,7 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 SECRET_KEY = config("SECRET_KEY", default="django-insecure-fallback-key")
-DEBUG = config("DEBUG", cast=bool, default=True)  # False in production
+DEBUG = config("DEBUG", cast=bool, default=False)  # False in production
 
 # Allowed hosts
 _default_allowed_hosts = "localhost,127.0.0.1,moviebucketdjango-03c8d5ee1edd.herokuapp.com,.herokuapp.com"
