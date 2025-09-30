@@ -42,12 +42,22 @@
 <!-- Reviews -->
 <div class="mt-12 px-6 md:px-12">
   <h2 class="text-2xl font-bold mb-4">Reviews</h2>
-  <ul class="space-y-2">
+  <ul class="space-y-4">
     {% for review in reviews %}
-      <li class="border-b border-gray-200 pb-2">
-        <a href="{% url 'core:user_profile' review.author.username %}" class="font-semibold text-blue-600">
-          {{ review.author.username }}
-        </a> ({{ review.rating }}/10): {{ review.body }}
+      <li class="flex items-start border-b border-gray-200 pb-4">
+        <!-- Avatar -->
+        <img src="{{ review.author.avatar.url }}" 
+             alt="{{ review.author.username }}’s avatar" 
+             class="w-12 h-12 rounded-full mr-4 object-cover">
+
+        <!-- Review Content -->
+        <div class="flex-1">
+          <a href="{% url 'core:user_profile' review.author.username %}" class="font-semibold text-blue-600">
+            {{ review.author.username }}
+          </a> 
+          ({{ review.rating }}/10)
+          <p>{{ review.body }}</p>
+        </div>
       </li>
     {% empty %}
       <li>No reviews yet. Be the first!</li>
@@ -73,5 +83,6 @@
     <p class="mt-4"><a href="{% url 'account_login' %}" class="text-blue-600">Log in</a> to leave a review.</p>
   {% endif %}
 </div>
+
 
 {% endblock content %}
