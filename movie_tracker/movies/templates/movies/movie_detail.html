@@ -46,7 +46,7 @@
     {% for review in reviews %}
       <li class="flex items-start border-b border-gray-200 pb-4">
         <!-- Avatar -->
-        <img src="{{ review.author.avatar.url }}" 
+        <img src="{{ navbar_profile.avatar.url }}" 
              alt="{{ review.author.username }}’s avatar" 
              class="w-12 h-12 rounded-full mr-4 object-cover">
 
@@ -55,7 +55,7 @@
           <a href="{% url 'core:user_profile' review.author.username %}" class="font-semibold text-blue-600">
             {{ review.author.username }}
           </a> 
-          ({{ review.rating }}/10)
+          ({{ review.rating }}/5)
           <p>{{ review.body }}</p>
         </div>
       </li>
@@ -74,7 +74,7 @@
           <form method="POST" class="flex flex-col gap-2 text-white">
               {% csrf_token %}
               <textarea name="body" class="border p-2 rounded resize-none" placeholder="Write your review..."></textarea>
-              <input type="number" name="rating" min="0" max="5" class="border p-2 rounded w-24 text-black">
+              <input type="number" name="rating" min="0" max="5" class="border p-2 rounded w-24 text-white">
               <button type="submit" class="btn btn-primary w-32 mt-2">Submit Review</button>
           </form>
       {% endif %}
