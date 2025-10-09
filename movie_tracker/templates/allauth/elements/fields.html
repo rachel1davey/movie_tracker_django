@@ -1,0 +1,8 @@
+{% load allauth %}
+<div class="space-y-4">
+  {% for field in form %}
+    <div>
+      {% include "allauth/elements/field.html" with attrs=field.attrs form=form %}
+    </div>
+  {% endfor %}
+</div>
