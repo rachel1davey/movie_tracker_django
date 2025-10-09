@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% block title %}{{ movie.title }}{% endblock title %}
+{% load static %}
+{% load avatar_extras %}
 {% block content %}
 
 <!--hero-->
@@ -45,10 +47,12 @@
   <ul class="space-y-4">
     {% for review in reviews %}
       <li class="flex items-start border-b border-gray-200 pb-4">
-        <!-- Avatar -->
-        <img src="{{ review.author.avatar.url }}" 
-             alt="{{ review.author.username }}’s avatar" 
-             class="w-12 h-12 rounded-full mr-4 object-cover">
+     <!-- Avatar -->
+     {% avatar_url_for review.author as rev_avatar_url %}
+     <img src="{{ rev_avatar_url }}"
+       alt="{{ review.author.username }}'s avatar"
+       class="w-12 h-12 rounded-full mr-4 object-cover"
+       onerror="this.onerror=null;this.src='{% static 'placeholder_avatar.png' %}';">
 
         <!-- Review Content -->
         <div class="flex-1">

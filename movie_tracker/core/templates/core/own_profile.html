@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load avatar_extras %}
 
 {% block title %}Your Profile{% endblock title %}
 
@@ -7,11 +8,8 @@
 <div class="card bg-base-100 shadow-md hover:shadow-xl transition-shadow duration-300 p-4 flex items-center gap-4 z-1">
     <!-- Avatar -->
     <figure class="flex-shrink-0">
-        {% if profile.avatar %}
-            <img src="{{ profile.avatar.url }}" alt="{{ profile_user.username }}'s avatar" class="rounded-full w-24 h-24 object-cover">
-        {% else %}
-            <img src="{% static 'images/default-avatar.png' %}" alt="Default avatar" class="rounded-full w-24 h-24 object-cover">
-        {% endif %}
+        {% avatar_url_for profile_user as profile_avatar_url %}
+        <img src="{{ profile_avatar_url }}" alt="{{ profile_user.username }}'s avatar" class="rounded-full w-24 h-24 object-cover" onerror="this.onerror=null;this.src='{% static 'placeholder_avatar.png' %}';">
     </figure>
 
     <!-- Bio and Username -->
