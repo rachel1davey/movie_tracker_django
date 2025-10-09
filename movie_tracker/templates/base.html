@@ -117,8 +117,7 @@
                 <div class="dropdown dropdown-end">
                     <label tabindex="0" class="btn btn-ghost btn-circle avatar">
                         <div class="w-10 rounded-full">
-                                                        {% comment %}Show user's avatar if present, otherwise use placeholder static image. Also use onerror as a last-resort fallback.{% endcomment %}
-                                                        <img
+                                                                                                                <img
                                                             src="{% if navbar_profile and navbar_profile.avatar and navbar_profile.avatar.url %}{{ navbar_profile.avatar.url }}{% else %}{% static 'placeholder_avatar.png' %}{% endif %}"
                                                             alt="User Avatar"
                                                             class="w-10 h-10 object-cover rounded-full"
