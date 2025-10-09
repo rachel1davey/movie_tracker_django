@@ -1,8 +1,9 @@
 {% load allauth %}
-<div class="space-y-4">
-  {% for field in form %}
-    <div>
-      {% include "allauth/elements/field.html" with attrs=field.attrs form=form %}
-    </div>
-  {% endfor %}
-</div>
+{# allauth passes the form in attrs.form; fall back to `form` if present #}
+{% if attrs.form %}
+  {{ attrs.form.as_p }}
+{% elif form %}
+  {{ form.as_p }}
+{% else %}
+  {# nothing to render #}
+{% endif %}

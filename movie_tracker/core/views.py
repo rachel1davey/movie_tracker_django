@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model
 import requests
 
 from movie_tracker.movies.models import Review
-from movie_tracker.movies.models import MovieList
+from .models import MovieList
 from django.db import models
 
 from .models import Profile
