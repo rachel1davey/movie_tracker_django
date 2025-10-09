@@ -6,10 +6,15 @@ from django.contrib.auth import get_user_model
 import requests
 
 from movie_tracker.movies.models import Review
+from movie_tracker.movies.models import MovieList
 from django.db import models
 
 from .models import Profile
 from .forms import ProfileForm
+from .forms import ProfileSettingsForm
+from django.contrib import messages
+from django.contrib.auth import logout
+from django.views.decorators.http import require_POST
 
 User = get_user_model()
 
@@ -66,6 +71,7 @@ def search_bar(request):
 def own_profile(request):
     profile, _ = Profile.objects.get_or_create(user=request.user)
     user_reviews = Review.objects.filter(author=request.user)
+    watchlist = MovieList.objects.filter(user=request.user)
 
     reviews_with_movies = []
     for review in user_reviews:
@@ -84,6 +90,7 @@ def own_profile(request):
         "profile": profile,
         "user_reviews": reviews_with_movies,
         "profile_user": request.user,
+        "watchlist": watchlist,
     })
 
 
@@ -91,6 +98,7 @@ def user_profile(request, username):
     user = get_object_or_404(User, username=username)
     profile, _ = Profile.objects.get_or_create(user=user)
     user_reviews = Review.objects.filter(author=user)
+    watchlist = MovieList.objects.filter(user=user, is_public=True)
 
     reviews_with_movies = []
     for review in user_reviews:
@@ -109,7 +117,22 @@ def user_profile(request, username):
         "profile_user": user,
         "profile": profile,
         "user_reviews": reviews_with_movies,
+        "watchlist": watchlist,
     })
+
+
+@login_required
+def toggle_watchlist_visibility(request, pk):
+    if request.method != 'POST':
+        return redirect('core:own_profile')
+
+    item = get_object_or_404(MovieList, pk=pk)
+    if item.user != request.user:
+        return redirect('core:own_profile')
+
+    item.is_public = not item.is_public
+    item.save()
+    return redirect('core:own_profile')
 
 @login_required
 def edit_profile(request):
@@ -124,3 +147,29 @@ def edit_profile(request):
         form = ProfileForm(instance=profile)
 
     return render(request, "core/edit_profile.html", {"form": form})
+
+
+@login_required
+def profile_settings(request):
+    user = request.user
+    if request.method == 'POST':
+        form = ProfileSettingsForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Username updated successfully.")
+            return redirect('core:profile_settings')
+    else:
+        form = ProfileSettingsForm(instance=user)
+
+    return render(request, 'core/profile_settings.html', {'form': form})
+
+
+@login_required
+@require_POST
+def delete_account(request):
+    # Confirm via POST to avoid accidental deletes
+    user = request.user
+    logout(request)
+    user.delete()
+    messages.success(request, "Your account has been deleted.")
+    return redirect('core:index')

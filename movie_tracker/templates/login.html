@@ -7,18 +7,17 @@
 {% block head_title %}
     {% trans "Sign In" %}
 {% endblock head_title %}
-{% block content %}
-  <div class="min-h-[70vh] flex items-center justify-center">
-    <div class="w-full max-w-md bg-secondary/80 backdrop-blur-md rounded-lg shadow-lg p-6">
-      <div class="mb-6 text-center">
-        <a href="/" class="text-2xl font-bold bg-gradient-to-r from-neutral-400 to-indigo-200 bg-clip-text text-transparent">moviebucket</a>
-        <h1 class="text-xl font-semibold text-white mt-2">{% trans "Sign In" %}</h1>
-      </div>
+{% block entrance_content %}
+    <div>
+            <div class="mb-6 text-center">
+                <a href="/" class="text-2xl font-bold bg-gradient-to-r from-neutral-400 to-indigo-200 bg-clip-text text-transparent">moviebucket</a>
+                <h1 class="text-xl font-semibold text-white mt-2">{% trans "Sign In" %}</h1>
+            </div>
 
-      {% element h1 %}
-        {% trans "Sign In" %}
-      {% endelement %}
-    {% if not SOCIALACCOUNT_ONLY %}
+            {% element h1 %}
+                {% trans "Sign In" %}
+            {% endelement %}
+        {% if not SOCIALACCOUNT_ONLY %}
         {% setvar link %}
             <a href="{{ signup_url }}">
             {% endsetvar %}
@@ -64,10 +63,7 @@
           {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
         </div>
     {% endif %}
-    </div>
-  </div>
-
-{% endblock content %}
+{% endblock entrance_content %}
 {% block extra_body %}
     {{ block.super }}
     {% if PASSKEY_LOGIN_ENABLED %}
