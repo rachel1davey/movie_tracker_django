@@ -5,6 +5,8 @@ from .models import Review
 from .forms import ReviewForm
 from django.db import models
 from django.contrib.auth.decorators import login_required
+from movie_tracker.core.models import MovieList
+from django.views.decorators.http import require_POST
 
 # Create your views here.
 
@@ -58,8 +60,22 @@ def movie_detail(request, movie_id):
         "avg_rating": avg_rating,
         "avg_rating_name": avg_rating_name,
         "form": form,  # pass form to template
+        "movie_id": movie_id,
+        "in_watchlist": MovieList.objects.filter(user=request.user, movie_id=movie_id).exists() if request.user.is_authenticated else False,
     }
     return render(request, "movies/movie_detail.html", context)
+
+
+@login_required
+@require_POST
+def toggle_watchlist(request, movie_id):
+    item, created = MovieList.objects.get_or_create(user=request.user, movie_id=movie_id, defaults={'status': 'plan', 'is_public': False})
+    # If already exists and was created just now, it's added; if existed, toggle is_public
+    if not created:
+        # if you want to remove instead of toggling visibility, replace logic accordingly
+        item.is_public = not item.is_public
+        item.save()
+    return redirect('movies:movie_detail', movie_id=movie_id)
 
 @login_required
 def edit_review(request, review_id):
