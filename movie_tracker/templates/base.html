@@ -9,6 +9,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %} | MB </title>
+    <style>
+    /* Responsive navbar tweaks for small screens */
+    @media (max-width: 768px) {
+        nav .container {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 0.5rem;
+        }
+
+        /* Center the brand/logo on small screens */
+        nav .container > a.text-xl {
+            align-self: center;
+            text-align: center;
+            width: 100%;
+        }
+
+        /* Right side (search + actions) */
+        nav .container > .flex {
+            width: 100%;
+            justify-content: space-between;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        /* Make the search form take full width and stack nicely */
+        nav form {
+            order: 2;
+            width: 100%;
+            display: flex;
+            gap: 0.5rem;
+        }
+        nav form input.input {
+            flex: 1 1 auto;
+            min-width: 0; /* allow shrinking on very small screens */
+        }
+        nav form button.btn {
+            flex: 0 0 44px;
+            width: 44px;
+        }
+
+        /* Avatar / actions */
+        nav .dropdown,
+        nav .container .btn.btn-sm {
+            order: 3;
+            align-self: flex-end;
+        }
+
+        /* Reduce avatar size on small screens */
+        nav .avatar .w-10 {
+            width: 36px;
+            height: 36px;
+        }
+    }
+    </style>
     <link rel="stylesheet" href="{% static 'theme/css/dist/styles.css' %}">
 
 </head>
@@ -63,7 +117,13 @@
                 <div class="dropdown dropdown-end">
                     <label tabindex="0" class="btn btn-ghost btn-circle avatar">
                         <div class="w-10 rounded-full">
-                            <img src="{{ navbar_profile.avatar.url }}" alt="User Avatar" />
+                                                        {% comment %}Show user's avatar if present, otherwise use placeholder static image. Also use onerror as a last-resort fallback.{% endcomment %}
+                                                        <img
+                                                            src="{% if navbar_profile and navbar_profile.avatar and navbar_profile.avatar.url %}{{ navbar_profile.avatar.url }}{% else %}{% static 'placeholder_avatar.png' %}{% endif %}"
+                                                            alt="User Avatar"
+                                                            class="w-10 h-10 object-cover rounded-full"
+                                                            onerror="this.onerror=null;this.src='{% static 'placeholder_avatar.png' %}';"
+                                                        />
                         </div>
                     </label>
                     <ul tabindex="0" class="menu menu-sm dropdown-content glass text-primary-content rounded-box mt-3 w-40 p-2 shadow z-50">
