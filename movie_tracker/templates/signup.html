@@ -1,12 +1,19 @@
-{% extends "account/base_entrance.html" %}
+{% extends "base.html" %}
 {% load allauth i18n %}
 {% block head_title %}
     {% trans "Signup" %}
 {% endblock head_title %}
 {% block content %}
-    {% element h1 %}
-        {% trans "Sign Up" %}
-    {% endelement %}
+    <div class="min-h-[70vh] flex items-center justify-center">
+        <div class="w-full max-w-md bg-secondary/80 backdrop-blur-md rounded-lg shadow-lg p-6">
+            <div class="mb-6 text-center">
+                <a href="/" class="text-2xl font-bold bg-gradient-to-r from-neutral-400 to-indigo-200 bg-clip-text text-transparent">moviebucket</a>
+                <h1 class="text-xl font-semibold text-white mt-2">{% trans "Sign Up" %}</h1>
+            </div>
+
+            {% element h1 %}
+                {% trans "Sign Up" %}
+            {% endelement %}
     {% setvar link %}
         <a href="{{ login_url }}">
         {% endsetvar %}
@@ -16,7 +23,7 @@
     {% element p %}
         {% blocktranslate %}Already have an account? Then please {{ link }}sign in{{ end_link }}.{% endblocktranslate %}
     {% endelement %}
-    {% if not SOCIALACCOUNT_ONLY %}
+      {% if not SOCIALACCOUNT_ONLY %}
         {% url 'account_signup' as action_url %}
         {% element form form=form method="post" action=action_url tags="entrance,signup" %}
             {% slot body %}
@@ -31,7 +38,7 @@
                 {% endelement %}
             {% endslot %}
         {% endelement %}
-    {% endif %}
+      {% endif %}
     {% if PASSKEY_SIGNUP_ENABLED %}
         {% element hr %}
         {% endelement %}
@@ -39,7 +46,12 @@
             {% trans "Sign up using a passkey" %}
         {% endelement %}
     {% endif %}
-    {% if SOCIALACCOUNT_ENABLED %}
-        {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
-    {% endif %}
+            {% if SOCIALACCOUNT_ENABLED %}
+                <div class="mt-4">
+                    {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
 {% endblock content %}

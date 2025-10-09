@@ -1,13 +1,23 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load allauth account %}
+{% extends "base.html" %}
+{% load i18n %}
+{% load allauth account %}
 {% block head_title %}
     {% trans "Sign In" %}
 {% endblock head_title %}
 {% block content %}
-    {% element h1 %}
+  <div class="min-h-[70vh] flex items-center justify-center">
+    <div class="w-full max-w-md bg-secondary/80 backdrop-blur-md rounded-lg shadow-lg p-6">
+      <div class="mb-6 text-center">
+        <a href="/" class="text-2xl font-bold bg-gradient-to-r from-neutral-400 to-indigo-200 bg-clip-text text-transparent">moviebucket</a>
+        <h1 class="text-xl font-semibold text-white mt-2">{% trans "Sign In" %}</h1>
+      </div>
+
+      {% element h1 %}
         {% trans "Sign In" %}
-    {% endelement %}
+      {% endelement %}
     {% if not SOCIALACCOUNT_ONLY %}
         {% setvar link %}
             <a href="{{ signup_url }}">
@@ -50,8 +60,13 @@
         {% endelement %}
     {% endif %}
     {% if SOCIALACCOUNT_ENABLED %}
-        {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
+        <div class="mt-4">
+          {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
+        </div>
     {% endif %}
+    </div>
+  </div>
+
 {% endblock content %}
 {% block extra_body %}
     {{ block.super }}
