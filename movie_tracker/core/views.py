@@ -134,6 +134,16 @@ def toggle_watchlist_visibility(request, pk):
     item.save()
     return redirect('core:own_profile')
 
+
+@login_required
+@require_POST
+def remove_from_watchlist(request, pk):
+    item = get_object_or_404(MovieList, pk=pk)
+    if item.user != request.user:
+        return redirect('core:own_profile')
+    item.delete()
+    return redirect('core:own_profile')
+
 @login_required
 def edit_profile(request):
     profile, created = Profile.objects.get_or_create(user=request.user)

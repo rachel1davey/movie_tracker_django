@@ -86,12 +86,16 @@
                 <p class="text-sm text-gray-700">Movie ID: {{ entry.movie_id }}</p>
                 <p class="text-sm">Status: {{ entry.get_status_display }}</p>
                 <p class="text-sm">Visibility: {% if entry.is_public %}Public{% else %}Private{% endif %}</p>
-                <div class="card-actions mt-2">
-                    <form method="POST" action="{% url 'core:toggle_watchlist' entry.pk %}">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-sm">Toggle Visibility</button>
-                    </form>
-                </div>
+                        <div class="card-actions mt-2 flex gap-2">
+                            <form method="POST" action="{% url 'core:toggle_watchlist' entry.pk %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-sm">Make {{ entry.is_public|yesno:"Private,Public" }}</button>
+                            </form>
+                            <form method="POST" action="{% url 'core:remove_from_watchlist' entry.pk %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-sm btn-error">Remove</button>
+                            </form>
+                        </div>
             </div>
         </div>
     {% endfor %}

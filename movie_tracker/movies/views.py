@@ -69,12 +69,8 @@ def movie_detail(request, movie_id):
 @login_required
 @require_POST
 def toggle_watchlist(request, movie_id):
-    item, created = MovieList.objects.get_or_create(user=request.user, movie_id=movie_id, defaults={'status': 'plan', 'is_public': False})
-    # If already exists and was created just now, it's added; if existed, toggle is_public
-    if not created:
-        # if you want to remove instead of toggling visibility, replace logic accordingly
-        item.is_public = not item.is_public
-        item.save()
+    # Create the watchlist entry if missing. Visibility is managed on the profile page only.
+    MovieList.objects.get_or_create(user=request.user, movie_id=movie_id, defaults={'status': 'plan', 'is_public': False})
     return redirect('movies:movie_detail', movie_id=movie_id)
 
 @login_required
