@@ -1,0 +1,43 @@
+{% extends "account/base_entrance.html" %}
+{% load i18n %}
+
+{% block entrance_content %}
+  <section class="w-full">
+    <div class="bg-white text-black p-6 rounded-lg shadow-lg">
+      <header class="text-center mb-4">
+        <h2 class="text-2xl font-semibold">{% trans "Sign Up" %}</h2>
+        <p class="text-sm text-gray-600">{% trans "Create a free account" %}</p>
+      </header>
+
+      <form method="post" action="{% url 'account_signup' %}" class="space-y-4 text-center">
+        {% csrf_token %}
+        <div>
+          <label for="id_username" class="block text-sm font-medium text-gray-700">{% trans "Username" %}</label>
+          <input id="id_username" name="username" type="text" required class="input input-bordered w-full mt-1">
+        </div>
+
+        <div>
+          <label for="id_email" class="block text-sm font-medium text-gray-700">{% trans "Email" %}</label>
+          <input id="id_email" name="email" type="email" required class="input input-bordered w-full mt-1">
+        </div>
+
+        <div>
+          <label for="id_password1" class="block text-sm font-medium text-gray-700">{% trans "Password" %}</label>
+          <input id="id_password1" name="password1" type="password" required class="input input-bordered w-full mt-1">
+        </div>
+
+        <div>
+          <label for="id_password2" class="block text-sm font-medium text-gray-700">{% trans "Confirm Password" %}</label>
+          <input id="id_password2" name="password2" type="password" required class="input input-bordered w-full mt-1">
+        </div>
+
+        {{ redirect_field }}
+
+        <div class="flex flex-col items-center gap-3">
+          <button type="submit" class="btn btn-primary w-full">{% trans "Sign Up" %}</button>
+          <a href="{% url 'account_login' %}" class="text-sm text-gray-600 hover:underline">{% trans "Already have an account? Sign in" %}</a>
+        </div>
+      </form>
+    </div>
+  </section>
+{% endblock entrance_content %}
