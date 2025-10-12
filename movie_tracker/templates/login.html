@@ -4,36 +4,36 @@
 {% block head_title %}{% trans "Sign In" %}{% endblock head_title %}
 
 {% block entrance_content %}
-    <section class="max-w-md mx-auto bg-[#081026]/60 p-6 rounded-lg shadow-lg">
+        <section class="max-w-md mx-auto bg-white text-black p-6 rounded-lg shadow-lg">
         <header class="text-center mb-6">
             <a href="/" class="text-3xl font-bold bg-gradient-to-r from-neutral-400 to-indigo-200 bg-clip-text text-transparent">moviebucket</a>
             <p class="mt-2 text-gray-300">{% trans "Sign in to continue" %}</p>
         </header>
 
         {% if not SOCIALACCOUNT_ONLY %}
-            <form method="post" action="{% url 'account_login' %}" aria-labelledby="login-heading" class="space-y-4">
+                    <form method="post" action="{% url 'account_login' %}" aria-labelledby="login-heading" class="space-y-4 text-center">
                 <h2 id="login-heading" class="sr-only">{% trans "Sign In" %}</h2>
                 {% csrf_token %}
 
-                <div>
-                    <label for="id_login" class="block text-sm font-medium text-gray-200">{% trans "Email or Username" %}</label>
-                    <input id="id_login" name="login" type="text" required class="input input-bordered w-full mt-1" aria-required="true">
-                </div>
+                        <div>
+                            <label for="id_login" class="block text-sm font-medium text-gray-700">{% trans "Email or Username" %}</label>
+                            <input id="id_login" name="login" type="text" required class="input input-bordered w-full mt-1" aria-required="true">
+                        </div>
 
-                <div>
-                    <label for="id_password" class="block text-sm font-medium text-gray-200">{% trans "Password" %}</label>
-                    <input id="id_password" name="password" type="password" required class="input input-bordered w-full mt-1" aria-required="true">
-                </div>
+                        <div>
+                            <label for="id_password" class="block text-sm font-medium text-gray-700">{% trans "Password" %}</label>
+                            <input id="id_password" name="password" type="password" required class="input input-bordered w-full mt-1" aria-required="true">
+                        </div>
 
                 {{ redirect_field }}
 
-                <div class="flex items-center justify-between">
-                    <button type="submit" class="btn btn-primary">{% trans "Sign In" %}</button>
-                    <a href="{% url 'account_reset_password' %}" class="text-sm text-gray-300 hover:underline">{% trans "Forgot password?" %}</a>
-                </div>
+                        <div class="flex flex-col items-center gap-3">
+                            <button type="submit" class="btn btn-primary w-full">{% trans "Sign In" %}</button>
+                            <a href="{% url 'account_reset_password' %}" class="text-sm text-gray-600 hover:underline">{% trans "Forgot password?" %}</a>
+                        </div>
             </form>
 
-            <p class="mt-4 text-sm text-center text-gray-400">{% blocktranslate %}Don't have an account? <a href="{{ signup_url }}" class="text-primary hover:underline">Sign up</a>{% endblocktranslate %}</p>
+                    <p class="mt-4 text-sm text-center text-gray-600">{% blocktranslate %}Don't have an account? <a href="{{ signup_url }}" class="text-primary hover:underline">Sign up</a>{% endblocktranslate %}</p>
         {% endif %}
 
         {% if LOGIN_BY_CODE_ENABLED or PASSKEY_LOGIN_ENABLED %}
