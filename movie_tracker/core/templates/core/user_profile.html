@@ -71,23 +71,6 @@
 {% endif %}
 
 <hr class="my-6">
-
-<h2 class="text-2xl font-semibold mb-4 text-white">{{ profile_user.username }}'s Public Watchlist</h2>
-
-{% if watchlist %}
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {% for entry in watchlist %}
-        <div class="card bg-base-100 shadow-md hover:shadow-xl transition-shadow duration-300">
-            <div class="card-body text-black">
-                <p class="text-sm text-gray-700">Movie ID: {{ entry.movie_id }}</p>
-                <p class="text-sm">Status: {{ entry.get_status_display }}</p>
-                <p class="text-sm">Visibility: {% if entry.is_public %}Public{% else %}Private{% endif %}</p>
-            </div>
-        </div>
-        {% endfor %}
-</div>
-{% else %}
-    <p class="text-white">No public watchlist items.</p>
-{% endif %}
+<!-- Watchlist feature removed -->
 
 {% endblock %}

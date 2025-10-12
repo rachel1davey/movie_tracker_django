@@ -7,9 +7,8 @@ A personal movie tracker and review platform. Discover, track, and review your f
 ## 🚀 Features
 
 - **Browse Movies:** Explore trending and popular titles using the TMDb API.
-- **Personal Watchlist:** Add movies to your watchlist and manage visibility (public/private).
-- **Reviews:** Write, edit, and view reviews. Duplicate reviews are prevented.
-- **Profile Customization:** Update your avatar and bio. View your reviews and watchlist.
+-- **Reviews:** Write, edit, and view reviews. Duplicate reviews are prevented.
+-- **Profile Customization:** Update your avatar and bio. View your reviews.
 - **Responsive Design:** Optimized for all devices with Tailwind CSS and DaisyUI.
 
 ---
@@ -27,23 +26,19 @@ A personal movie tracker and review platform. Discover, track, and review your f
 
 | Category                     | User Story |
 |------------------------------|------------|
-| **Authentication & Profiles** | As a user, I want to register for an account so that I can create a personal watchlist. |
+| **Authentication & Profiles** | As a user, I want to register for an account so that I can manage my profile and reviews. |
 |                              | As a user, I want to log in and log out so that I can securely access my account. |
 |                              | As a user, I want a profile page so that I can share information about myself. |
-|                              | As a user, I want to set my watchlist to public or private so that I can control who sees it. |
+|                              | As a user, I want to manage my profile privacy settings. |
 | **Search & Movie Details**    | As a user, I want to search for movies so that I can quickly find ones I’m interested in. |
 |                              | As a user, I want to click on a movie from the search results so that I can view its details. |
 |                              | As a user, I want to see posters, titles, and descriptions so that I can recognize the movie. |
-| **Watchlist**                | As a user, I want to add a movie to my watchlist so that I can save it for later. |
-|                              | As a user, I want to set the status of a movie (To Watch, Watching, Watched) so that I can track my progress. |
-|                              | As a user, I want to remove a movie from my watchlist so that I can keep it organized. |
-|                              | As a user, I want to view my watchlist on my dashboard so that I can see all the movies I’ve added. |
+| **Saved Movies (removed)**   | Watchlist functionality has been removed from this version. |
 | **Reviews**                  | As a user, I want to leave a review on a movie so that I can share my opinion. |
 |                              | As a user, I want to see other users’ reviews so that I can discover what people think before watching. |
 |                              | As a user, I want to delete my own reviews so that I can manage my contributions. |
 | **Profiles & Community**     | As a user, I want to click on a reviewer’s username so that I can view their profile. |
-|                              | As a user, I want to see another user’s public watchlist so that I can get recommendations. |
-|                              | As a user, I want to know if someone’s watchlist is private so that I understand why I can’t see it. |
+|                              | As a user, I want to see another user's public contributions so that I can get recommendations. |
 | **Deployment & Reliability** | As a user, I want the site to be live on the web so that I can access it without installing anything. |
 |                              | As a developer, I want the app to run with `DEBUG=False` so that it’s production-ready. |
 
@@ -53,7 +48,7 @@ A personal movie tracker and review platform. Discover, track, and review your f
 
 - Deliver a personalized movie tracking experience.
 - Enable authenticated users to review and manage movies.
-- Prevent duplicate reviews and redundant watchlist entries.
+- Prevent duplicate reviews.
 - Maintain a clean, responsive design.
 
 ---
@@ -78,7 +73,7 @@ A personal movie tracker and review platform. Discover, track, and review your f
 
 ## 🗂️ Entity-Relationship Diagram (ERD)
 
-Entities: **Users**, **Movies**, **Reviews**, **Watchlist**
+Entities: **Users**, **Movies**, **Reviews**
 
 ![ERD Diagram](#)
 
@@ -134,7 +129,7 @@ Entities: **Users**, **Movies**, **Reviews**, **Watchlist**
 ## 🧪 Testing
 
 - Manual and automated unit tests.
-- Edge case validation for reviews and watchlists.
+-- Edge case validation for reviews.
 - Responsive UI testing across devices.
 
 ---

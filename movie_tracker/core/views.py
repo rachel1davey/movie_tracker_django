@@ -6,7 +6,6 @@ from django.contrib.auth import get_user_model
 import requests
 
 from movie_tracker.movies.models import Review
-from .models import MovieList
 from django.db import models
 
 from .models import Profile
@@ -71,7 +70,7 @@ def search_bar(request):
 def own_profile(request):
     profile, _ = Profile.objects.get_or_create(user=request.user)
     user_reviews = Review.objects.filter(author=request.user)
-    watchlist = MovieList.objects.filter(user=request.user)
+    # watchlist feature removed
 
     reviews_with_movies = []
     for review in user_reviews:
@@ -85,12 +84,10 @@ def own_profile(request):
             "review": review,
             "movie": movie_data
         })
-
     return render(request, "core/own_profile.html", {
         "profile": profile,
         "user_reviews": reviews_with_movies,
         "profile_user": request.user,
-        "watchlist": watchlist,
     })
 
 
@@ -98,7 +95,7 @@ def user_profile(request, username):
     user = get_object_or_404(User, username=username)
     profile, _ = Profile.objects.get_or_create(user=user)
     user_reviews = Review.objects.filter(author=user)
-    watchlist = MovieList.objects.filter(user=user, is_public=True)
+    # watchlist feature removed
 
     reviews_with_movies = []
     for review in user_reviews:
@@ -112,37 +109,15 @@ def user_profile(request, username):
             "review": review,
             "movie": movie_data
         })
-
     return render(request, "core/user_profile.html", {
         "profile_user": user,
         "profile": profile,
         "user_reviews": reviews_with_movies,
-        "watchlist": watchlist,
     })
 
 
 @login_required
-def toggle_watchlist_visibility(request, pk):
-    if request.method != 'POST':
-        return redirect('core:own_profile')
-
-    item = get_object_or_404(MovieList, pk=pk)
-    if item.user != request.user:
-        return redirect('core:own_profile')
-
-    item.is_public = not item.is_public
-    item.save()
-    return redirect('core:own_profile')
-
-
-@login_required
-@require_POST
-def remove_from_watchlist(request, pk):
-    item = get_object_or_404(MovieList, pk=pk)
-    if item.user != request.user:
-        return redirect('core:own_profile')
-    item.delete()
-    return redirect('core:own_profile')
+# watchlist views removed
 
 @login_required
 def edit_profile(request):

@@ -33,18 +33,7 @@
       <p>No ratings yet.</p>
     {% endif %}
 
-    {% if user.is_authenticated %}
-  <form method="POST" action="{% url 'movies:toggle_watchlist' movie_id %}">
-        {% csrf_token %}
-        {% if in_watchlist %}
-          <button type="submit" class="btn btn-warning mt-4">Toggle Watchlist Visibility / Update</button>
-        {% else %}
-          <button type="submit" class="btn btn-primary mt-4">Add to my Watchlist</button>
-        {% endif %}
-      </form>
-    {% else %}
-      <p class="mt-4">Sign in to add this movie to your watchlist!</p>
-    {% endif %}
+    <!-- Watchlist feature removed -->
   </div>
 </div>
 
