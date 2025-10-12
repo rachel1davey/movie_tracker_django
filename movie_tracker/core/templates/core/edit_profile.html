@@ -2,13 +2,31 @@
 {% block title %}Edit Profile{% endblock %}
 
 {% block content %}
-<h1>Edit Your Profile</h1>
+<section class="max-w-xl mx-auto bg-white text-black p-6 rounded-lg shadow">
+    <h1 class="text-2xl font-semibold mb-4 text-center">Edit Your Profile</h1>
 
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save Changes</button>
-</form>
+    <form method="post" enctype="multipart/form-data" class="space-y-4 text-center" aria-labelledby="edit-profile-heading">
+        {% csrf_token %}
 
-<a href="{% url 'core:own_profile' %}">Cancel</a>
+        <div class="flex flex-col items-center gap-4">
+            {% avatar_url_for request.user as avatar_url %}
+            <img src="{{ avatar_url }}" alt="Current avatar" class="w-24 h-24 rounded-full object-cover" onerror="this.onerror=null;this.src='{% static 'placeholder_avatar.png' %}';">
+            <div>
+                <label class="text-sm text-gray-700 block">Change avatar</label>
+                {{ form.avatar }}
+            </div>
+        </div>
+
+        <div>
+            <label for="id_bio" class="block text-sm font-medium text-gray-700">Bio</label>
+            {{ form.bio }}
+            <p class="text-xs text-gray-500 mt-1">Tell others a bit about yourself (optional).</p>
+        </div>
+
+        <div class="flex flex-col items-center gap-3">
+            <button type="submit" class="btn btn-primary w-40">Save changes</button>
+            <a href="{% url 'core:own_profile' %}" class="btn btn-ghost">Cancel</a>
+        </div>
+    </form>
+</section>
 {% endblock %}
