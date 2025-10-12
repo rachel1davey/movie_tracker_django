@@ -139,6 +139,10 @@ AUTHENTICATION_BACKENDS = [
 SITE_ID = 1
 ACCOUNT_SIGNUP_FIELDS = ['email', 'username*', 'password1*', 'password2*']
 LOGIN_REDIRECT_URL = "/profile/"
+# Allauth settings: make email optional for signup in development by default
+ACCOUNT_EMAIL_REQUIRED = False
+ACCOUNT_EMAIL_VERIFICATION = 'optional'  # options: 'mandatory', 'optional', 'none'
+ACCOUNT_AUTHENTICATION_METHOD = 'username'  # keep username as primary auth method
 
 # ----------------------
 # Internationalization

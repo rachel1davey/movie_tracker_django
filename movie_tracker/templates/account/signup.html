@@ -23,8 +23,8 @@
         </div>
 
         <div>
-          <label for="id_email" class="block text-sm font-medium text-gray-700">{% trans "Email" %}</label>
-          <input id="id_email" name="email" type="email" required class="input input-bordered w-full mt-1" aria-describedby="error_email">
+          <label for="id_email" class="block text-sm font-medium text-gray-700">{% trans "Email" %} <span class="text-xs text-gray-500">(optional)</span></label>
+          <input id="id_email" name="email" type="email" class="input input-bordered w-full mt-1" aria-describedby="error_email">
           {% if form.email.errors %}
             <div id="error_email" class="text-sm text-red-600 mt-1">{{ form.email.errors|striptags }}</div>
           {% endif %}

@@ -37,7 +37,7 @@
         <div class="card bg-base-100 shadow-md hover:shadow-xl transition-shadow duration-300">
             {% if movie.poster_path %}
             <figure>
-                <img src="https://image.tmdb.org/t/p/w300{{ movie.poster_path }}" alt="{{ movie.title }}" class="w-full h-48 object-cover">
+                <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}" class="w-full h-56 object-cover rounded-lg shadow-md">
             </figure>
             {% endif %}
             <div class="card-body text-black">

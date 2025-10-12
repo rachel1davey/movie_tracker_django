@@ -9,11 +9,11 @@
   <!-- responsive grid centered -->
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
   {% for movie in page_obj %}
-  <div class="card bg-base-100 image-full w-72 md:w-80 lg:w-96 h-[520px] md:h-[640px] shadow-lg">
+  <div class="card bg-base-100 image-full w-80 md:w-96 lg:w-[28rem] h-[640px] md:h-[760px] shadow-xl">
   <figure>
-    <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}"
-         alt="{{ movie.title }}"
-         class="w-full h-full object-cover">
+      <img src="https://image.tmdb.org/t/p/w780{{ movie.poster_path }}"
+     alt="{{ movie.title }}"
+     class="w-full h-80 md:h-[520px] object-cover rounded-lg shadow-lg">
   </figure>
 
   <!-- makes card-body a vertical flex container -->

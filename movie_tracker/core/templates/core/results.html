@@ -9,9 +9,9 @@
   {% for movie in page_obj %}
 <div class="card bg-base-100 image-full w-full h-[500px] shadow-sm">
   <figure>
-    <img src="https://image.tmdb.org/t/p/w300{{ movie.poster_path }}"
+    <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}"
          alt="{{ movie.title }}"
-         class="w-full h-full object-cover">
+         class="w-full h-64 md:h-80 object-cover rounded-lg shadow-lg">
   </figure>
 
   <!-- makes card-body a vertical flex container -->
