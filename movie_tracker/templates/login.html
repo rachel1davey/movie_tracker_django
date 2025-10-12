@@ -29,11 +29,13 @@
 
                         <div class="flex flex-col items-center gap-3">
                             <button type="submit" class="btn btn-primary w-full">{% trans "Sign In" %}</button>
-                            <a href="{% url 'account_reset_password' %}" class="text-sm text-gray-600 hover:underline">{% trans "Forgot password?" %}</a>
                         </div>
             </form>
 
-                    <p class="mt-4 text-sm text-center text-gray-600">{% blocktranslate %}Don't have an account? <a href="{{ signup_url }}" class="text-primary hover:underline">Sign up</a>{% endblocktranslate %}</p>
+                    {% url 'account_signup' as signup_url %}
+                    <p class="mt-4 text-sm text-center text-gray-600">{% blocktranslate %}Don't have an account?{% endblocktranslate %}
+                        <a href="{{ signup_url }}" class="inline-block mt-3 px-4 py-2 rounded-lg btn btn-outline">{% trans "Sign up" %}</a>
+                    </p>
         {% endif %}
 
         {% if LOGIN_BY_CODE_ENABLED or PASSKEY_LOGIN_ENABLED %}

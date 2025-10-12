@@ -31,6 +31,13 @@ CSRF_TRUSTED_ORIGINS = [
     if o.strip()
 ]
 
+# Development email backend: avoid attempting to connect to an SMTP server when
+# running locally with DEBUG=True. In production, set EMAIL_BACKEND in env.
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+    EMAIL_BACKEND = config('EMAIL_BACKEND', default='django.core.mail.backends.smtp.EmailBackend')
+
 # ----------------------
 # Apps
 # ----------------------

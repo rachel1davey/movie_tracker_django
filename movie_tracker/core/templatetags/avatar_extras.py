@@ -26,7 +26,14 @@ def avatar_url_for(user):
     if not avatar:
         return static('placeholder_avatar.png')
 
-    url = getattr(avatar, 'url', None) or avatar
+    # Some storage backends (e.g. Cloudinary) can raise errors when configuration
+    # is incomplete (e.g. missing cloud_name). Catch those and return the
+    # placeholder so templates render even in dev environments without cloud config.
+    try:
+        url = getattr(avatar, 'url', None) or avatar
+    except Exception:
+        return static('placeholder_avatar.png')
+
     if not url:
         return static('placeholder_avatar.png')
     return url
