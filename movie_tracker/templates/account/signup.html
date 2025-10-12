@@ -9,11 +9,11 @@
         <p class="text-sm text-gray-600">{% trans "Create a free account" %}</p>
       </header>
 
-      <form method="post" action="{% url 'account_signup' %}" class="space-y-4 text-center">
+      <form method="post" action="{% url 'account_signup' %}" class="space-y-4 text-center" aria-labelledby="signup-heading">
         {% csrf_token %}
         <div>
           <label for="id_username" class="block text-sm font-medium text-gray-700">{% trans "Username" %}</label>
-          <input id="id_username" name="username" type="text" required class="input input-bordered w-full mt-1">
+          <input id="id_username" name="username" type="text" required class="input input-bordered w-full mt-1" aria-required="true" aria-label="Username">
         </div>
 
         <div>
@@ -34,8 +34,10 @@
         {{ redirect_field }}
 
         <div class="flex flex-col items-center gap-3">
-          <button type="submit" class="btn btn-primary w-full">{% trans "Sign Up" %}</button>
-          <a href="{% url 'account_login' %}" class="text-sm text-gray-600 hover:underline">{% trans "Already have an account? Sign in" %}</a>
+          <button type="submit" class="btn btn-primary w-full" aria-label="Sign up">{% trans "Sign Up" %}</button>
+          <a href="{% url 'account_login' %}" class="inline-block mt-3 px-4 py-2 rounded-lg btn btn-outline" role="button" aria-label="{% blocktrans %}Already have an account? Log in{% endblocktrans %}">
+            {% blocktrans %}Already have an account? Log in{% endblocktrans %}
+          </a>
         </div>
       </form>
     </div>
