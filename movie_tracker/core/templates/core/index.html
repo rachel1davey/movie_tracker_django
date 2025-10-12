@@ -3,29 +3,29 @@
 
 {% block content %}
 
-<div class="container mx-auto px-0.5">
-<h1 class="mb-4">🔥 Popular Movies</h1>
+<div class="max-w-6xl mx-auto px-4">
+  <h1 class="mb-6 text-3xl text-center font-bold">🔥 Popular Movies</h1>
 
-<!-- reponsive grid -->
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+  <!-- responsive grid centered -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
   {% for movie in page_obj %}
-<div class="card bg-base-100 image-full w-full h-[500px] shadow-sm">
+  <div class="card bg-base-100 image-full w-72 md:w-80 lg:w-96 h-[520px] md:h-[640px] shadow-lg">
   <figure>
-    <img src="https://image.tmdb.org/t/p/w300{{ movie.poster_path }}"
+    <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}"
          alt="{{ movie.title }}"
          class="w-full h-full object-cover">
   </figure>
 
   <!-- makes card-body a vertical flex container -->
   <div class="card-body flex flex-col">
-    <h5 class="card-title">{{ movie.title }}</h5>
+  <h5 class="card-title text-lg md:text-xl">{{ movie.title }}</h5>
 
     <!-- spacer pushes the next section to the bottom -->
     <div class="flex-grow"></div>
 
     <!--rating on left, button on right -->
     <div class="flex justify-between items-center w-full">
-      <p class="text-sm opacity-90">
+      <p class="text-sm opacity-90 text-gray-700">
         Rating:
         {% if movie.avg_rating_name %}
           {{ movie.avg_rating_name }}
