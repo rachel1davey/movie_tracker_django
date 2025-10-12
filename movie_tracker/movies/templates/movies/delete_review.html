@@ -1,12 +1,16 @@
 {% extends "base.html" %}
 {% block title %}Delete Review{% endblock %}
 {% block content %}
-<h2>Are you sure you want to delete your review?</h2>
-<p>"{{ review.body }}"</p>
+    <div class="min-h-[60vh] flex items-center justify-center">
+        <section class="w-full max-w-md bg-white text-black p-6 rounded-lg shadow-lg text-center">
+            <h2 class="text-2xl font-semibold mb-4">Delete Review</h2>
+            <p class="mb-4">"{{ review.body }}"</p>
 
-<form method="POST">
-    {% csrf_token %}
-    <button type="submit">Yes, delete</button>
-</form>
-<a href="{% url 'movies:movie_detail' review.movie_id %}">Cancel</a>
+            <form method="POST" class="flex gap-3 justify-center">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-error">Yes, delete</button>
+                <a href="{% url 'movies:movie_detail' review.movie_id %}" class="btn btn-ghost">Cancel</a>
+            </form>
+        </section>
+    </div>
 {% endblock %}
