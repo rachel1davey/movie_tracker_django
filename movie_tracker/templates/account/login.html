@@ -1,0 +1,35 @@
+{% extends "account/base_entrance.html" %}
+{% load i18n %}
+
+{% block entrance_content %}
+  <section class="w-full">
+    <div class="bg-white text-black p-6 rounded-lg shadow-lg">
+      <header class="text-center mb-4">
+        <h2 class="text-2xl font-semibold">{% trans "Sign In" %}</h2>
+        <p class="text-sm text-gray-600">{% trans "Sign in to continue" %}</p>
+      </header>
+
+      <form method="post" action="{% url 'account_login' %}" class="space-y-4 text-center" aria-labelledby="login-heading">
+        {% csrf_token %}
+        <div>
+          <label for="id_login" class="block text-sm font-medium text-gray-700">{% trans "Email or Username" %}</label>
+          <input id="id_login" name="login" type="text" required class="input input-bordered w-full mt-1" aria-required="true">
+        </div>
+
+        <div>
+          <label for="id_password" class="block text-sm font-medium text-gray-700">{% trans "Password" %}</label>
+          <input id="id_password" name="password" type="password" required class="input input-bordered w-full mt-1" aria-required="true">
+        </div>
+
+        {{ redirect_field }}
+
+        <div class="flex flex-col items-center gap-3">
+          <button type="submit" class="btn btn-primary w-full">{% trans "Sign In" %}</button>
+          <a href="{% url 'account_reset_password' %}" class="text-sm text-gray-600 hover:underline">{% trans "Forgot password?" %}</a>
+        </div>
+      </form>
+
+      <p class="mt-4 text-sm text-center text-gray-600">{% blocktranslate %}Don't have an account? <a href="{% url 'account_signup' %}" class="text-primary hover:underline">Sign up</a>{% endblocktranslate %}</p>
+    </div>
+  </section>
+{% endblock entrance_content %}
