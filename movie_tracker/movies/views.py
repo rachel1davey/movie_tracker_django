@@ -5,6 +5,7 @@ from .models import Review
 from .forms import ReviewForm
 from django.db import models
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 # Create your views here.
 
@@ -32,6 +33,7 @@ def movie_detail(request, movie_id):
             review.author = request.user
             review.movie_id = movie_id
             review.save()
+            messages.success(request, "Review submitted.")
             return redirect("movies:movie_detail", movie_id=movie_id)
     else:
         form = ReviewForm()
@@ -71,6 +73,7 @@ def edit_review(request, review_id):
         form = ReviewForm(request.POST, instance=review)
         if form.is_valid():
             form.save()
+            messages.success(request, "Review updated.")
             return redirect("movies:movie_detail", movie_id=review.movie_id)
     else:
         form = ReviewForm(instance=review)
@@ -89,6 +92,7 @@ def delete_review(request, review_id):
     if request.method == "POST":  # confirm delete
         movie_id = review.movie_id
         review.delete()
+        messages.success(request, "Review deleted.")
         return redirect("movies:movie_detail", movie_id=movie_id)
 
     return render(request, "movies/delete_review.html", {"review": review})

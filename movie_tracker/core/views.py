@@ -127,6 +127,7 @@ def edit_profile(request):
         form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
+            messages.success(request, "Profile updated.")
             return redirect("core:own_profile")  # Redirect back to profile page
     else:
         form = ProfileForm(instance=profile)
