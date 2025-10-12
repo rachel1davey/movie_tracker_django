@@ -42,17 +42,20 @@
   </div>
 </div>
   {% endfor %}
+  </div>
 
-  <div class="mt-6 flex items-center justify-center gap-3">
-    {% if page_obj.has_previous %}
-      <a href="?query={{ query }}&page={{ page_obj.previous_page_number }}" class="px-3 py-1 rounded-md bg-gray-700 text-white hover:bg-gray-600">&larr; Previous</a>
-    {% endif %}
+  <div class="mt-6 flex justify-center">
+    <div class="flex items-center gap-3">
+      {% if page_obj.has_previous %}
+        <a href="?query={{ query }}&page={{ page_obj.previous_page_number }}" class="px-3 py-1 rounded-md bg-gray-700 text-white hover:bg-gray-600">&larr; Previous</a>
+      {% endif %}
 
-    <span class="px-3 py-1 rounded-md bg-transparent text-sm text-gray-300">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+      <span class="px-3 py-1 rounded-md bg-transparent text-sm text-gray-300">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
 
-    {% if page_obj.has_next %}
-      <a href="?query={{ query }}&page={{ page_obj.next_page_number }}" class="px-3 py-1 rounded-md bg-gray-700 text-white hover:bg-gray-600">Next &rarr;</a>
-    {% endif %}
+      {% if page_obj.has_next %}
+        <a href="?query={{ query }}&page={{ page_obj.next_page_number }}" class="px-3 py-1 rounded-md bg-gray-700 text-white hover:bg-gray-600">Next &rarr;</a>
+      {% endif %}
+    </div>
   </div>
 
 </div>
