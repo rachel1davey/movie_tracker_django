@@ -14,7 +14,7 @@
         {% csrf_token %}
         <div>
           <label for="id_login" class="block text-sm font-medium text-gray-700">{% trans "Email or Username" %}</label>
-          <input id="id_login" name="login" type="text" required class="input input-bordered w-full mt-1" aria-required="true">
+          <input id="id_login" name="login" type="text" required class="input input-bordered w-full mt-1" aria-required="true" aria-label="Email or Username">
         </div>
 
         <div>
@@ -25,13 +25,9 @@
         {{ redirect_field }}
 
         <div class="flex flex-col items-center gap-3">
-          <button type="submit" class="btn btn-primary w-full">{% trans "Sign In" %}</button>
+          <button type="submit" class="btn btn-primary w-full" aria-label="Sign in">{% trans "Sign In" %}</button>
         </div>
       </form>
-
-      <p class="mt-4 text-sm text-center text-gray-600">{% blocktrans with signup_url=signup_url %}Don't have an account?{% endblocktrans %}
-  <a href="{{ signup_url }}" class="inline-block mt-3 px-4 py-2 rounded-lg btn btn-outline">{% trans "Sign up" %}</a>
-      </p>
         <p class="mt-4 text-sm text-center text-gray-600">
           {% comment %}Wrap the entire phrase inside a single outline CTA for accessibility and consistency{% endcomment %}
           <a href="{{ signup_url }}" class="inline-block mt-3 px-4 py-2 rounded-lg btn btn-outline" role="button" aria-label="{% blocktrans %}Don't have an account? Sign up{% endblocktrans %}">
