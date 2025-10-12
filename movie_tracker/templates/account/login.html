@@ -12,9 +12,15 @@
   {% url 'account_signup' as signup_url %}
   <form method="post" action="{% url 'account_login' %}" class="space-y-4 text-center" aria-labelledby="login-heading">
         {% csrf_token %}
+        {% if form.non_field_errors %}
+          <div class="bg-red-100 text-red-800 p-2 rounded">{{ form.non_field_errors }}</div>
+        {% endif %}
         <div>
           <label for="id_login" class="block text-sm font-medium text-gray-700">{% trans "Email or Username" %}</label>
-          <input id="id_login" name="login" type="text" required class="input input-bordered w-full mt-1" aria-required="true" aria-label="Email or Username">
+          <input id="id_login" name="login" type="text" required class="input input-bordered w-full mt-1" aria-required="true" aria-label="Email or Username" value="{{ form.login.value|default_if_none:'' }}">
+          {% if form.login.errors %}
+            <div class="text-sm text-red-600 mt-1">{{ form.login.errors|striptags }}</div>
+          {% endif %}
         </div>
 
         <div>
