@@ -13,19 +13,21 @@
   <form method="post" action="{% url 'account_login' %}" class="space-y-4 text-center" aria-labelledby="login-heading">
         {% csrf_token %}
         {% if form.non_field_errors %}
-          <div class="bg-red-100 text-red-800 p-2 rounded">{{ form.non_field_errors }}</div>
+          <div role="alert" class="bg-red-100 text-red-900 p-2 rounded">{{ form.non_field_errors }}</div>
         {% endif %}
         <div>
-          <label for="id_login" class="block text-sm font-medium text-gray-700">{% trans "Email or Username" %}</label>
-          <input id="id_login" name="login" type="text" required class="input input-bordered w-full mt-1" aria-required="true" aria-label="Email or Username" value="{{ form.login.value|default_if_none:'' }}">
+          <label for="id_login" class="block text-sm font-medium text-gray-900">{% trans "Email or Username" %}</label>
+          <input id="id_login" name="login" type="text" required class="input input-bordered w-full mt-1" aria-required="true" aria-label="Email or Username" aria-describedby="login-help" value="{{ form.login.value|default_if_none:'' }}">
+          <p id="login-help" class="sr-only">{% trans "Enter your email address or username." %}</p>
           {% if form.login.errors %}
             <div class="text-sm text-red-600 mt-1">{{ form.login.errors|striptags }}</div>
           {% endif %}
         </div>
 
         <div>
-          <label for="id_password" class="block text-sm font-medium text-gray-700">{% trans "Password" %}</label>
-          <input id="id_password" name="password" type="password" required class="input input-bordered w-full mt-1" aria-required="true" aria-label="Password">
+          <label for="id_password" class="block text-sm font-medium text-gray-900">{% trans "Password" %}</label>
+          <input id="id_password" name="password" type="password" required class="input input-bordered w-full mt-1" aria-required="true" aria-label="Password" aria-describedby="password-help">
+          <p id="password-help" class="sr-only">{% trans "Enter your account password." %}</p>
           {% if form.password.errors %}
             <div class="text-sm text-red-600 mt-1">{{ form.password.errors|striptags }}</div>
           {% endif %}

@@ -16,23 +16,26 @@
                     {% csrf_token %}
 
                     <div>
-                        <label for="id_username" class="block text-sm font-medium text-gray-700">{% trans "Username" %}</label>
-                        <input id="id_username" name="username" type="text" required class="input input-bordered w-full mt-1" aria-required="true">
+                        <label for="id_username" class="block text-sm font-medium text-gray-900">{% trans "Username" %}</label>
+                        <input id="id_username" name="username" type="text" required class="input input-bordered w-full mt-1" aria-required="true" aria-label="Username" aria-describedby="username-help">
+                        <p id="username-help" class="sr-only">{% trans "Enter a username. This will be visible to other users." %}</p>
                     </div>
 
                     <div>
-                        <label for="id_email" class="block text-sm font-medium text-gray-700">{% trans "Email" %}</label>
-                        <input id="id_email" name="email" type="email" required class="input input-bordered w-full mt-1" aria-required="true">
+                        <label for="id_email" class="block text-sm font-medium text-gray-900">{% trans "Email" %} <span class="text-xs text-gray-500">(optional)</span></label>
+                        <input id="id_email" name="email" type="email" class="input input-bordered w-full mt-1" aria-label="Email (optional)" aria-describedby="email-help">
+                        <p id="email-help" class="text-xs text-gray-500 mt-1">{% trans "We will only use this to send verification emails or password resets." %}</p>
                     </div>
 
                     <div>
-                        <label for="id_password1" class="block text-sm font-medium text-gray-700">{% trans "Password" %}</label>
-                        <input id="id_password1" name="password1" type="password" required class="input input-bordered w-full mt-1" aria-required="true">
+                        <label for="id_password1" class="block text-sm font-medium text-gray-900">{% trans "Password" %}</label>
+                        <input id="id_password1" name="password1" type="password" required class="input input-bordered w-full mt-1" aria-required="true" aria-label="Password" aria-describedby="password-help">
+                        <p id="password-help" class="text-xs text-gray-500 mt-1">{% trans "Use at least 8 characters, including letters and numbers." %}</p>
                     </div>
 
                     <div>
-                        <label for="id_password2" class="block text-sm font-medium text-gray-700">{% trans "Confirm Password" %}</label>
-                        <input id="id_password2" name="password2" type="password" required class="input input-bordered w-full mt-1" aria-required="true">
+                        <label for="id_password2" class="block text-sm font-medium text-gray-900">{% trans "Confirm Password" %}</label>
+                        <input id="id_password2" name="password2" type="password" required class="input input-bordered w-full mt-1" aria-required="true" aria-label="Confirm Password">
                     </div>
 
                     {{ redirect_field }}
