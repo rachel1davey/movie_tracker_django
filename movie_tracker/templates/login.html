@@ -17,12 +17,12 @@
 
                         <div>
                             <label for="id_login" class="block text-sm font-medium text-gray-700">{% trans "Email or Username" %}</label>
-                            <input id="id_login" name="login" type="text" required class="input input-bordered w-full mt-1" aria-required="true">
+                            <input id="id_login" name="login" type="text" required class="input input-bordered w-full mt-1" aria-required="true" aria-label="Email or Username">
                         </div>
 
                         <div>
                             <label for="id_password" class="block text-sm font-medium text-gray-700">{% trans "Password" %}</label>
-                            <input id="id_password" name="password" type="password" required class="input input-bordered w-full mt-1" aria-required="true">
+                            <input id="id_password" name="password" type="password" required class="input input-bordered w-full mt-1" aria-required="true" aria-label="Password">
                         </div>
 
                 {{ redirect_field }}
@@ -33,9 +33,11 @@
             </form>
 
                     {% url 'account_signup' as signup_url %}
-                    <p class="mt-4 text-sm text-center text-gray-600">{% blocktranslate %}Don't have an account?{% endblocktranslate %}
-                        <a href="{{ signup_url }}" class="inline-block mt-3 px-4 py-2 rounded-lg btn btn-outline">{% trans "Sign up" %}</a>
-                    </p>
+                                        <p class="mt-4 text-sm text-center text-gray-600">
+                                                <a href="{{ signup_url }}" class="inline-block mt-3 px-4 py-2 rounded-lg btn btn-outline" role="button" aria-label="{% blocktranslate %}Don't have an account? Sign up{% endblocktranslate %}">
+                                                    {% blocktranslate %}Don't have an account? Sign up{% endblocktranslate %}
+                                                </a>
+                                        </p>
         {% endif %}
 
         {% if LOGIN_BY_CODE_ENABLED or PASSKEY_LOGIN_ENABLED %}
