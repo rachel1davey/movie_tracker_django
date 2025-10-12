@@ -11,24 +11,39 @@
 
       <form method="post" action="{% url 'account_signup' %}" class="space-y-4 text-center" aria-labelledby="signup-heading">
         {% csrf_token %}
+        {% if form.non_field_errors %}
+          <div class="bg-red-100 text-red-800 p-2 rounded">{{ form.non_field_errors }}</div>
+        {% endif %}
         <div>
           <label for="id_username" class="block text-sm font-medium text-gray-700">{% trans "Username" %}</label>
-          <input id="id_username" name="username" type="text" required class="input input-bordered w-full mt-1" aria-required="true" aria-label="Username">
+          <input id="id_username" name="username" type="text" required class="input input-bordered w-full mt-1" aria-required="true" aria-describedby="error_username">
+          {% if form.username.errors %}
+            <div id="error_username" class="text-sm text-red-600 mt-1">{{ form.username.errors|striptags }}</div>
+          {% endif %}
         </div>
 
         <div>
           <label for="id_email" class="block text-sm font-medium text-gray-700">{% trans "Email" %}</label>
-          <input id="id_email" name="email" type="email" required class="input input-bordered w-full mt-1">
+          <input id="id_email" name="email" type="email" required class="input input-bordered w-full mt-1" aria-describedby="error_email">
+          {% if form.email.errors %}
+            <div id="error_email" class="text-sm text-red-600 mt-1">{{ form.email.errors|striptags }}</div>
+          {% endif %}
         </div>
 
         <div>
           <label for="id_password1" class="block text-sm font-medium text-gray-700">{% trans "Password" %}</label>
-          <input id="id_password1" name="password1" type="password" required class="input input-bordered w-full mt-1">
+          <input id="id_password1" name="password1" type="password" required class="input input-bordered w-full mt-1" aria-describedby="error_password1">
+          {% if form.password1.errors %}
+            <div id="error_password1" class="text-sm text-red-600 mt-1">{{ form.password1.errors|striptags }}</div>
+          {% endif %}
         </div>
 
         <div>
           <label for="id_password2" class="block text-sm font-medium text-gray-700">{% trans "Confirm Password" %}</label>
-          <input id="id_password2" name="password2" type="password" required class="input input-bordered w-full mt-1">
+          <input id="id_password2" name="password2" type="password" required class="input input-bordered w-full mt-1" aria-describedby="error_password2">
+          {% if form.password2.errors %}
+            <div id="error_password2" class="text-sm text-red-600 mt-1">{{ form.password2.errors|striptags }}</div>
+          {% endif %}
         </div>
 
         {{ redirect_field }}
