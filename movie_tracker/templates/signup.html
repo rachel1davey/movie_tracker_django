@@ -4,56 +4,56 @@
 {% block head_title %}{% trans "Sign Up" %}{% endblock head_title %}
 
 {% block entrance_content %}
-    <section class="max-w-md mx-auto bg-[#081026]/60 p-6 rounded-lg shadow-lg">
-        <header class="text-center mb-6">
-            <a href="/" class="text-3xl font-bold bg-gradient-to-r from-neutral-400 to-indigo-200 bg-clip-text text-transparent">moviebucket</a>
-            <p class="mt-2 text-gray-300">{% trans "Create a free account" %}</p>
-        </header>
+        <section class="max-w-md mx-auto bg-white text-black p-6 rounded-lg shadow-lg">
+            <header class="text-center mb-6">
+                <a href="/" class="text-3xl font-bold bg-gradient-to-r from-neutral-400 to-indigo-200 bg-clip-text text-transparent">moviebucket</a>
+                <p class="mt-2 text-gray-600">{% trans "Create a free account" %}</p>
+            </header>
 
-        {% if not SOCIALACCOUNT_ONLY %}
-            <form method="post" action="{% url 'account_signup' %}" class="space-y-4" aria-labelledby="signup-heading">
-                <h2 id="signup-heading" class="sr-only">{% trans "Sign Up" %}</h2>
-                {% csrf_token %}
+            {% if not SOCIALACCOUNT_ONLY %}
+                <form method="post" action="{% url 'account_signup' %}" class="space-y-4 text-center" aria-labelledby="signup-heading">
+                    <h2 id="signup-heading" class="sr-only">{% trans "Sign Up" %}</h2>
+                    {% csrf_token %}
 
-                <div>
-                    <label for="id_username" class="block text-sm font-medium text-gray-200">{% trans "Username" %}</label>
-                    <input id="id_username" name="username" type="text" required class="input input-bordered w-full mt-1" aria-required="true">
+                    <div>
+                        <label for="id_username" class="block text-sm font-medium text-gray-700">{% trans "Username" %}</label>
+                        <input id="id_username" name="username" type="text" required class="input input-bordered w-full mt-1" aria-required="true">
+                    </div>
+
+                    <div>
+                        <label for="id_email" class="block text-sm font-medium text-gray-700">{% trans "Email" %}</label>
+                        <input id="id_email" name="email" type="email" required class="input input-bordered w-full mt-1" aria-required="true">
+                    </div>
+
+                    <div>
+                        <label for="id_password1" class="block text-sm font-medium text-gray-700">{% trans "Password" %}</label>
+                        <input id="id_password1" name="password1" type="password" required class="input input-bordered w-full mt-1" aria-required="true">
+                    </div>
+
+                    <div>
+                        <label for="id_password2" class="block text-sm font-medium text-gray-700">{% trans "Confirm Password" %}</label>
+                        <input id="id_password2" name="password2" type="password" required class="input input-bordered w-full mt-1" aria-required="true">
+                    </div>
+
+                    {{ redirect_field }}
+
+                    <div class="flex flex-col items-center gap-3">
+                        <button type="submit" class="btn btn-primary w-full">{% trans "Sign Up" %}</button>
+                        <a href="{% url 'account_login' %}" class="text-sm text-gray-600 hover:underline">{% trans "Already have an account? Sign in" %}</a>
+                    </div>
+                </form>
+            {% endif %}
+
+            {% if PASSKEY_SIGNUP_ENABLED %}
+                <div class="mt-4">
+                    <a href="{{ signup_by_passkey_url }}" class="btn btn-outline w-full">{% trans "Sign up using a passkey" %}</a>
                 </div>
+            {% endif %}
 
-                <div>
-                    <label for="id_email" class="block text-sm font-medium text-gray-200">{% trans "Email" %}</label>
-                    <input id="id_email" name="email" type="email" required class="input input-bordered w-full mt-1" aria-required="true">
+            {% if SOCIALACCOUNT_ENABLED %}
+                <div class="mt-4">
+                    {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
                 </div>
-
-                <div>
-                    <label for="id_password1" class="block text-sm font-medium text-gray-200">{% trans "Password" %}</label>
-                    <input id="id_password1" name="password1" type="password" required class="input input-bordered w-full mt-1" aria-required="true">
-                </div>
-
-                <div>
-                    <label for="id_password2" class="block text-sm font-medium text-gray-200">{% trans "Confirm Password" %}</label>
-                    <input id="id_password2" name="password2" type="password" required class="input input-bordered w-full mt-1" aria-required="true">
-                </div>
-
-                {{ redirect_field }}
-
-                <div class="flex items-center justify-between">
-                    <button type="submit" class="btn btn-primary">{% trans "Sign Up" %}</button>
-                    <a href="{% url 'account_login' %}" class="text-sm text-gray-300 hover:underline">{% trans "Already have an account? Sign in" %}</a>
-                </div>
-            </form>
-        {% endif %}
-
-        {% if PASSKEY_SIGNUP_ENABLED %}
-            <div class="mt-4">
-                <a href="{{ signup_by_passkey_url }}" class="btn btn-outline w-full">{% trans "Sign up using a passkey" %}</a>
-            </div>
-        {% endif %}
-
-        {% if SOCIALACCOUNT_ENABLED %}
-            <div class="mt-4">
-                {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
-            </div>
-        {% endif %}
-    </section>
+            {% endif %}
+        </section>
 {% endblock entrance_content %}
