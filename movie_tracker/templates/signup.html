@@ -1,55 +1,59 @@
 {% extends "base.html" %}
 {% load allauth i18n %}
-{% block head_title %}
-    {% trans "Signup" %}
-{% endblock head_title %}
+
+{% block head_title %}{% trans "Sign Up" %}{% endblock head_title %}
+
 {% block entrance_content %}
-    <div class="mb-6 text-center">
-        <a href="/" class="text-2xl font-bold bg-gradient-to-r from-neutral-400 to-indigo-200 bg-clip-text text-transparent">moviebucket</a>
-        <h1 class="text-xl font-semibold text-white mt-2">{% trans "Sign Up" %}</h1>
-    </div>
+    <section class="max-w-md mx-auto bg-[#081026]/60 p-6 rounded-lg shadow-lg">
+        <header class="text-center mb-6">
+            <a href="/" class="text-3xl font-bold bg-gradient-to-r from-neutral-400 to-indigo-200 bg-clip-text text-transparent">moviebucket</a>
+            <p class="mt-2 text-gray-300">{% trans "Create a free account" %}</p>
+        </header>
 
-    {% element h1 %}
-        {% trans "Sign Up" %}
-    {% endelement %}
-    {% setvar link %}
-        <a href="{{ login_url }}">
-        {% endsetvar %}
-        {% setvar end_link %}
-        </a>
-    {% endsetvar %}
-    {% element p %}
-        {% blocktranslate %}Already have an account? Then please {{ link }}sign in{{ end_link }}.{% endblocktranslate %}
-    {% endelement %}
-
-    {% if not SOCIALACCOUNT_ONLY %}
-        {% url 'account_signup' as action_url %}
-        {% element form form=form method="post" action=action_url tags="entrance,signup" %}
-            {% slot body %}
+        {% if not SOCIALACCOUNT_ONLY %}
+            <form method="post" action="{% url 'account_signup' %}" class="space-y-4" aria-labelledby="signup-heading">
+                <h2 id="signup-heading" class="sr-only">{% trans "Sign Up" %}</h2>
                 {% csrf_token %}
-                {% element fields form=form unlabeled=True %}
-                {% endelement %}
+
+                <div>
+                    <label for="id_username" class="block text-sm font-medium text-gray-200">{% trans "Username" %}</label>
+                    <input id="id_username" name="username" type="text" required class="input input-bordered w-full mt-1" aria-required="true">
+                </div>
+
+                <div>
+                    <label for="id_email" class="block text-sm font-medium text-gray-200">{% trans "Email" %}</label>
+                    <input id="id_email" name="email" type="email" required class="input input-bordered w-full mt-1" aria-required="true">
+                </div>
+
+                <div>
+                    <label for="id_password1" class="block text-sm font-medium text-gray-200">{% trans "Password" %}</label>
+                    <input id="id_password1" name="password1" type="password" required class="input input-bordered w-full mt-1" aria-required="true">
+                </div>
+
+                <div>
+                    <label for="id_password2" class="block text-sm font-medium text-gray-200">{% trans "Confirm Password" %}</label>
+                    <input id="id_password2" name="password2" type="password" required class="input input-bordered w-full mt-1" aria-required="true">
+                </div>
+
                 {{ redirect_field }}
-            {% endslot %}
-            {% slot actions %}
-                {% element button tags="prominent,signup" type="submit" %}
-                    {% trans "Sign Up" %}
-                {% endelement %}
-            {% endslot %}
-        {% endelement %}
-    {% endif %}
 
-    {% if PASSKEY_SIGNUP_ENABLED %}
-        {% element hr %}
-        {% endelement %}
-        {% element button href=signup_by_passkey_url tags="prominent,signup,outline,primary" %}
-            {% trans "Sign up using a passkey" %}
-        {% endelement %}
-    {% endif %}
+                <div class="flex items-center justify-between">
+                    <button type="submit" class="btn btn-primary">{% trans "Sign Up" %}</button>
+                    <a href="{% url 'account_login' %}" class="text-sm text-gray-300 hover:underline">{% trans "Already have an account? Sign in" %}</a>
+                </div>
+            </form>
+        {% endif %}
 
-    {% if SOCIALACCOUNT_ENABLED %}
-        <div class="mt-4">
-            {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
-        </div>
-    {% endif %}
+        {% if PASSKEY_SIGNUP_ENABLED %}
+            <div class="mt-4">
+                <a href="{{ signup_by_passkey_url }}" class="btn btn-outline w-full">{% trans "Sign up using a passkey" %}</a>
+            </div>
+        {% endif %}
+
+        {% if SOCIALACCOUNT_ENABLED %}
+            <div class="mt-4">
+                {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
+            </div>
+        {% endif %}
+    </section>
 {% endblock entrance_content %}
