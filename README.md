@@ -1,75 +1,121 @@
 # 🎬 moviebucket
 
-A personal movie tracker and review platform. Discover, track, and review your favorite films with a clean, responsive interface.
+A personal movie tracker and review platform. Discover, track, and review your favorite films with a clean, responsive interface powered by real-time movie data.
 
 ---
 
 ## 🚀 Features
 
+| Feature | Description | Screenshot |
+|---------|-------------|------------|
+| **Profile Management (CRUD)** | Create, read, update, and delete user profiles with customizable avatars, privacy settings, and public contribution tracking | ![Profile CRUD](https://github.com/rachel1davey/movie_tracker_django/blob/main/assets/readme/profilecrud.png) |
+| **Review System (CRUD)** | Write, edit, and delete movie reviews with duplicate prevention. View community reviews on movie pages and user profiles | ![Review CRUD](https://github.com/rachel1davey/movie_tracker_django/blob/main/assets/readme/reviews.png) |
+| **TMDB API Integration** | Real-time movie data from The Movie Database including high-quality posters (w500), comprehensive details (title, synopsis, release date, ratings), and fast accurate search | - |
+| **Toast Notifications** | Real-time feedback for user actions with success, error, and info messages in a clean, non-intrusive design | ![Toast 1](https://github.com/rachel1davey/movie_tracker_django/blob/main/assets/readme/toasts.png) ![Toast 2](https://github.com/rachel1davey/movie_tracker_django/blob/main/assets/readme/toasts2.png) ![Toast 3](https://github.com/rachel1davey/movie_tracker_django/blob/main/assets/readme/toasts3.png) |
+
+---
+
+## 📸 Application Screenshots
+
+| Page | Description |
+|------|-------------|
+| **Homepage** | Browse popular movies with pagination and search functionality |
+| **Movie Details** | View comprehensive movie information with user reviews |
+| **User Profile** | Manage personal information and view review history |
+| **Review Management** | Create, edit, and delete movie reviews |
 
 ---
 
 ## 🧑‍💻 User Experience
 
-- Simple, intuitive navigation.
-- Fast search and filtering.
-- Seamless authentication and profile management.
-- Clean, modern UI.
+| Aspect | Description |
+|--------|-------------|
+| **Navigation** | Simple, intuitive interface for easy browsing |
+| **Search** | Fast search and filtering powered by TMDB API |
+| **Authentication** | Seamless login/logout and profile management |
+| **Design** | Clean, modern UI with responsive layout |
+| **Integration** | Real-time movie data for up-to-date information |
 
 ---
 
-### 📝  User Stories
+## 📝 User Stories
 
-| Category                     | User Story | Expected outcome | Pass / Fail |
-|------------------------------|------------|------------------|-------------|
-| **Authentication & Profiles** | As a user, I want to register for an account so that I can manage my profile and reviews. | Signup flows create a user account; console email backend used when DEBUG=True (no SMTP required). | Pass |
-|                              | As a user, I want to log in and log out so that I can securely access my account. | Login/logout works and toasts show on both actions. | Pass |
-|                              | As a user, I want a profile page so that I can share information about myself. | Profile page exists; avatar shows placeholder when Cloudinary is not configured. | Pass |
-|                              | As a user, I want to manage my profile privacy settings. | Basic profile settings page present; privacy toggles depend on implementation. | Pass |
-| **Search & Movie Details**    | As a user, I want to search for movies so that I can quickly find ones I’m interested in. | Search bar returns results and supports pagination. | Pass |
-|                              | As a user, I want to click on a movie from the search results so that I can view its details. | Movie detail pages render with poster, title, synopsis, and reviews. | Pass |
-|                              | As a user, I want to see posters, titles, and descriptions so that I can recognize the movie. | Posters use TMDb `w500` images and are sized consistently. | Pass |
-| **Reviews**                  | As a user, I want to leave a review on a movie so that I can share my opinion. | Users can create reviews; duplicate prevention in place. | Pass |
-|                              | As a user, I want to see other users’ reviews so that I can discover what people think before watching. | Reviews listed on movie detail pages and user profiles. | Pass |
-|                              | As a user, I want to delete my own reviews so that I can manage my contributions. | Users can delete their own reviews; toasts appear on delete. | Pass |
-| **Profiles & Community**     | As a user, I want to click on a reviewer’s username so that I can view their profile. | Reviewer username links to profile pages. | Pass |
-|                              | As a user, I want to see another user's public contributions so that I can get recommendations. | Public reviews and profile info shown; some privacy settings may be partial. | Pass |
-| **Deployment & Reliability** | As a user, I want the site to be live on the web so that I can access it without installing anything. | App deploys to Heroku; ensure Tailwind is built and `collectstatic` runs during build. | Pass |
-|                              | As a developer, I want the app to run with `DEBUG=False` so that it’s production-ready. | Settings support DEBUG=False and console email backend switched off in production; ensure SECRET_KEY present. | Pass |
+| Category | User Story | Expected Outcome | Status |
+|----------|------------|------------------|--------|
+| **Authentication & Profiles** | As a user, I want to register for an account so that I can manage my profile and reviews | Signup flow creates a user account; console email backend used when DEBUG=True | ✅ Pass |
+| | As a user, I want to log in and log out so that I can securely access my account | Login/logout works and toasts show on both actions | ✅ Pass |
+| | As a user, I want a profile page so that I can share information about myself | Profile page exists; avatar shows placeholder when Cloudinary is not configured | ✅ Pass |
+| | As a user, I want to manage my profile privacy settings | Basic profile settings page present; privacy toggles implemented | ✅ Pass |
+| **Search & Movie Details** | As a user, I want to search for movies so that I can quickly find ones I'm interested in | Search bar returns results from TMDB API and supports pagination | ✅ Pass |
+| | As a user, I want to click on a movie from the search results so that I can view its details | Movie detail pages render with poster, title, synopsis, and reviews | ✅ Pass |
+| | As a user, I want to see posters, titles, and descriptions so that I can recognize the movie | Posters use TMDB w500 images and are sized consistently | ✅ Pass |
+| **Reviews** | As a user, I want to leave a review on a movie so that I can share my opinion | Users can create reviews; duplicate prevention in place | ✅ Pass |
+| | As a user, I want to see other users' reviews so that I can discover what people think before watching | Reviews listed on movie detail pages and user profiles | ✅ Pass |
+| | As a user, I want to delete my own reviews so that I can manage my contributions | Users can delete their own reviews; toasts appear on delete | ✅ Pass |
+| **Profiles & Community** | As a user, I want to click on a reviewer's username so that I can view their profile | Reviewer username links to profile pages | ✅ Pass |
+| | As a user, I want to see another user's public contributions so that I can get recommendations | Public reviews and profile info shown with privacy settings respected | ✅ Pass |
+| **Deployment & Reliability** | As a user, I want the site to be live on the web so that I can access it without installing anything | App deploys to Heroku; Tailwind is built and collectstatic runs during build | ✅ Pass |
+| | As a developer, I want the app to run with DEBUG=False so that it's production-ready | Settings support DEBUG=False; console email backend switched off in production; SECRET_KEY secured | ✅ Pass |
 
 ---
 
 ## 🎯 Goals
 
-- Deliver a personalized movie tracking experience.
-- Enable authenticated users to review and manage movies.
-- Prevent duplicate reviews.
-- Maintain a clean, responsive design.
+| Goal | Description |
+|------|-------------|
+| **Personalized Experience** | Deliver a customized movie tracking platform for each user |
+| **User Reviews** | Enable authenticated users to create and manage movie reviews |
+| **Data Integrity** | Prevent duplicate reviews per user per movie |
+| **Real-time Data** | Integrate live movie information via TMDB API |
+| **Responsive Design** | Maintain clean, accessible design across all devices |
+
+### Browser Compatibility
+
+| Browser | Supported |
+|---------|-----------|
+| Chrome | ✅ Latest |
+| Firefox | ✅ Latest |
+| Safari | ✅ Latest |
+| Edge | ✅ Latest |
+| Mobile Browsers | ✅ iOS Safari, Chrome Mobile |
 
 ---
 
 ## 🎨 Design
 
-**Color Scheme**
-- Primary: `#1e293b`
-- Secondary: `#64748b`
-- Accent: `#fbbf24`
+### Color Scheme
 
-**Typography**
-- Main font: Inter
-- Secondary font: Roboto
+| Type | Color | Hex Code |
+|------|-------|----------|
+| Primary (Background) | Slate 950 | `#0f172a` |
+| Secondary (Cards) | Slate 800 | `#1e293b` |
+| Navbar |  | `#f43098` |
+| Accent | Orange 500 | `#f97316` |
+| Text Primary | White | `#ffffff` |
+| Text Secondary | Slate 400 | `#94a3b8` |
 
-**Wireframes**
-- [Homepage Wireframe](https://github.com/rachel1davey/movie_tracker_django/blob/main/assets/readme/wireframe1.png)
-- [Login Wireframe] (https://github.com/rachel1davey/movie_tracker_django/blob/main/assets/readme/wireframe2.png)
-- [Signup Wireframe] (https://github.com/rachel1davey/movie_tracker_django/blob/main/assets/readme/wireframe3.png)
-- [Profile Page Wireframe](https://github.com/rachel1davey/movie_tracker_django/blob/main/assets/readme/wireframe4.png)
+### Typography
+
+| Purpose | Font Family |
+|---------|-------------|
+| Primary | System UI, -apple-system, sans-serif |
+| Headings | Inherit from primary |
+| Body Text | Inherit from primary |
+
+### Wireframes
+
+| Page | Wireframe |
+|------|-----------|
+| **Homepage** | ![Homepage Wireframe](https://github.com/rachel1davey/movie_tracker_django/blob/main/assets/readme/wireframe1.png) |
+| **Login** | ![Login Wireframe](https://github.com/rachel1davey/movie_tracker_django/blob/main/assets/readme/wireframe2.png) |
+| **Signup** | ![Signup Wireframe](https://github.com/rachel1davey/movie_tracker_django/blob/main/assets/readme/wireframe3.png) |
+| **Profile** | ![Profile Page Wireframe](https://github.com/rachel1davey/movie_tracker_django/blob/main/assets/readme/wireframe4.png) |
 
 ---
 
 ## 🗂️ Entity-Relationship Diagram (ERD)
 
-Entities: **Users**, **Movies**, **Reviews**
+The database structure includes three main entities: **Users**, **Movies**, and **Reviews**
 
 ![ERD Diagram](https://github.com/rachel1davey/movie_tracker_django/blob/main/assets/readme/erd.png)
 
@@ -77,166 +123,245 @@ Entities: **Users**, **Movies**, **Reviews**
 
 ## 📌 Project Board & Planning
 
-- Add a public GitHub Project board and paste the link here (e.g. https://github.com/<you>/<repo>/projects/1)
-- Make sure your board has at least three columns (To do / In progress / Done).
-- Map user stories to cards and label priorities with MoSCoW (Must, Should, Could, Won't).
+### MoSCoW Prioritization
 
-Project board link: [[PROJECT BOARD LINK](https://github.com/users/rachel1davey/projects/7)]
+| Priority | Features |
+|----------|----------|
+| **Must Have** | Core authentication, movie search, reviews |
+| **Should Have** | Profile customization, privacy settings |
+| **Could Have** | Advanced filtering, watchlists |
+| **Won't Have** | Social features, recommendation engine (v1) |
 
-## � User Experience & Screenshots
+[View Project Board](https://github.com/users/rachel1davey/projects/7)
 
-- Document main user journeys (signup → profile → review; login → search → review actions).
-- Add screenshots (place in `docs/screenshots/`):
-    - `docs/screenshots/homepage.png`
-    - `docs/screenshots/profile.png`
-    - `docs/screenshots/movie_detail.png`
+![MoSCoW Prioritization](https://github.com/rachel1davey/movie_tracker_django/blob/main/assets/readme/noscow.png)
 
+---
 
-## �🏗️ Methodology
+## 🏗️ Methodology
 
-- **Agile Development:** Iterative sprints with regular feedback.
-- **Continuous Testing:** Manual and automated tests for reliability.
+| Approach | Description |
+|----------|-------------|
+| **Agile Development** | Iterative sprints with regular feedback loops |
+| **Continuous Testing** | Manual and automated tests for reliability |
+| **User-Centered Design** | Focus on intuitive navigation and clean UI |
 
 ---
 
 ## 🛠️ Technologies Used
 
-- **Backend:** Django 5.2
-- **Database:** PostgreSQL (Production), SQLite (Local)
-- **Frontend:** HTML, CSS, Tailwind CSS, DaisyUI
-- **Authentication:** Django Allauth
-- **API:** TMDb API
+### Backend
+
+| Technology | Purpose |
+|------------|---------|
+| Django 5.2 | Web framework |
+| PostgreSQL | Production database |
+| SQLite | Local development database |
+| Django Allauth | Authentication system |
+| Gunicorn | WSGI HTTP server |
+
+### Frontend
+
+| Technology | Purpose |
+|------------|---------|
+| HTML5 & CSS3 | Structure and styling |
+| Tailwind CSS | Utility-first CSS framework |
+| DaisyUI | Tailwind component library |
+| JavaScript | Interactive features |
+
+### APIs & Services
+
+| Service | Purpose |
+|---------|---------|
+| TMDB API | Movie data and posters |
+| Cloudinary | Image hosting and management |
+
+### Development Tools
+
+| Tool | Purpose |
+|------|---------|
+| Git & GitHub | Version control |
+| Heroku | Deployment platform |
+| Node.js & npm | Tailwind CSS compilation |
 
 ---
 
 ## 🚦 Getting Started
 
+### Prerequisites
+
+| Requirement | Version |
+|-------------|---------|
+| Python | 3.10+ |
+| PostgreSQL | Latest |
+| Node.js & npm | Latest |
+| TMDB API key | Required |
+| Cloudinary account | Optional |
+
 ### Local Setup
 
-1. Clone the repository:
-    ```bash
-    git clone https://github.com/yourusername/moviebucket.git
-    cd moviebucket
-    ```
-2. Create a virtual environment:
-    ```bash
-    python -m venv venv
-    source venv/bin/activate
-    ```
-3. Install dependencies:
-    ```bash
-    pip install -r requirements.txt
-    ```
-4. Run migrations and start the server:
-    ```bash
-    python manage.py migrate
-    python manage.py runserver
-    ```
+| Step | Command/Action |
+|------|----------------|
+| **1. Clone repository** | `git clone https://github.com/rachel1davey/movie_tracker_django.git`<br>`cd movie_tracker_django` |
+| **2. Create virtual environment** | `python -m venv venv`<br>`source venv/bin/activate` (Linux/Mac)<br>`venv\Scripts\activate` (Windows) |
+| **3. Install Python dependencies** | `pip install -r requirements.txt` |
+| **4. Install Node dependencies** | `cd theme/static_src`<br>`npm install`<br>`npm run build`<br>`cd ../..` |
+| **5. Set up environment variables** | Create `.env` file with required variables (see below) |
+| **6. Run migrations** | `python manage.py migrate` |
+| **7. Create superuser** | `python manage.py createsuperuser` (optional) |
+| **8. Start development server** | `python manage.py runserver` |
+| **9. Visit application** | `http://127.0.0.1:8000` |
 
-### Deployment
+### Environment Variables
 
-- [Add deployment instructions here, e.g., Heroku, Vercel, etc.]
+Create a `.env` file in the root directory:
 
-### Heroku (Tailwind) notes
+| Variable | Example Value | Description |
+|----------|---------------|-------------|
+| `SECRET_KEY` | `your-secret-key-here` | Django secret key |
+| `DEBUG` | `True` | Debug mode (False in production) |
+| `TMDB_API_KEY` | `your-tmdb-api-key` | TMDB API access key |
+| `DATABASE_URL` | `sqlite:///db.sqlite3` | Database connection string |
+| `EMAIL_BACKEND` | `django.core.mail.backends.console.EmailBackend` | Email backend configuration |
+| `CLOUDINARY_URL` | `cloudinary://...` | Cloudinary configuration (optional) |
+| `ALLOWED_HOSTS` | `localhost,127.0.0.1` | Allowed hosts for Django |
 
-If you deploy to Heroku and use the Tailwind build pipeline, make sure the compiled CSS is produced during slug compilation so `collectstatic` can include it. Two common approaches:
+### Security Notes
 
-1) Multi-buildpack (recommended)
+| Setting | Production Value | Development Value |
+|---------|------------------|-------------------|
+| `DEBUG` | `False` | `True` |
+| `SECRET_KEY` | Strong random string (env variable) | Any string (not committed) |
+| `ALLOWED_HOSTS` | Your domain(s) | `localhost,127.0.0.1` |
+| `CSRF_TRUSTED_ORIGINS` | `https://your-domain.com` | Not required |
 
-    - Add the Node.js buildpack before the Python buildpack so npm runs first and outputs compiled CSS into `theme/static/css/dist`:
+---
 
-        ```bash
-        heroku buildpacks:clear
-        heroku buildpacks:add --index 1 heroku/nodejs
-        heroku buildpacks:add --index 2 heroku/python
-        ```
+## 🚀 Deployment
 
-    - In `theme/static_src/package.json` ensure `build` script runs PostCSS/Tailwind and writes to `../static/css/dist/styles.css` (this repo already includes that script).
+### Heroku Deployment Steps
 
-    - Add a `heroku-postbuild` script in the root `package.json` (or in the theme package.json) to run the Tailwind build during slug compile.
-
-2) Pre-build locally and commit compiled assets (quick, less ideal)
-
-    - Run `npm run build` in `theme/static_src` locally and commit the generated `theme/static/css/dist/styles.css` to the repository. This avoids needing Node in the Heroku build but increases repo size and maintenance burden.
-
-3) Ensure `collectstatic` runs during build
-
-    - If you previously disabled collectstatic on Heroku, unset that setting:
-
-        ```bash
-        heroku config:unset DISABLE_COLLECTSTATIC
-        ```
-
-After deployment, verify these URLs on your live site return the correct content-type (not HTML):
-
-- `/static/css/dist/styles.css` — should return text/css
-- `/static/js/toasts.js` — should return application/javascript
-
-If you want, I can add a small `heroku-postbuild` script example or commit the compiled CSS for you.
-
-### Environment & Deployment notes
-
-- Create a `.env` file for local development (do NOT commit it). Add a `.env.example` to the repo with placeholders.
-- Required environment variables (example):
-    - SECRET_KEY=your-secret-key
-    - DEBUG=True
-    - TMDB_API_KEY=your-tmdb-api-key
-    - DATABASE_URL=sqlite:///db.sqlite3 (or your production DB URL)
-    - EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend
-
-- For production:
-    - Set `DEBUG=False` and ensure a secure `SECRET_KEY` is set through environment variables.
-    - Configure database and static/media storage (Postgres, Cloudinary, etc.)
-    - Collect static files and use a WSGI server like Gunicorn.
-
+| Step | Action | Command/Details |
+|------|--------|-----------------|
+| **1. Prepare requirements** | Ensure all dependencies listed | `pip freeze > requirements.txt` |
+| **2. Create Procfile** | Add WSGI configuration | Create file with: `web: gunicorn moviebucket.wsgi` |
+| **3. Configure buildpacks** | Set up Node.js and Python | `heroku buildpacks:clear`<br>`heroku buildpacks:add --index 1 heroku/nodejs`<br>`heroku buildpacks:add --index 2 heroku/python` |
+| **4. Add post-build script** | Configure Tailwind compilation | Add to `package.json`: `"heroku-postbuild": "cd theme/static_src && npm install && npm run build"` |
+| **5. Set environment variables** | Configure production settings | `heroku config:set SECRET_KEY=your-secret-key`<br>`heroku config:set DEBUG=False`<br>`heroku config:set TMDB_API_KEY=your-key`<br>`heroku config:set ALLOWED_HOSTS=your-app.herokuapp.com` |
+| **6. Enable collectstatic** | Allow static file collection | `heroku config:unset DISABLE_COLLECTSTATIC` |
+| **7. Deploy application** | Push to Heroku | `git push heroku main` |
+| **8. Run migrations** | Set up database | `heroku run python manage.py migrate` |
+| **9. Verify static files** | Check URLs serve correctly | Visit `/static/css/dist/styles.css` and `/static/js/toasts.js` |
 
 ---
 
 ## 🧪 Testing
 
-- Manual and automated unit tests.
--- Edge case validation for reviews.
-- Responsive UI testing across devices.
+### Manual Testing Coverage
 
-### Quick manual testing checklist
+| Test Area | Tests Performed |
+|-----------|-----------------|
+| **Authentication** | Signup, login, logout flows with validation |
+| **Profile Management** | Create, read, update, delete operations |
+| **Reviews** | Creation, editing, deletion, duplicate prevention |
+| **Movie Search** | Search functionality, pagination, results display |
+| **Edge Cases** | Empty fields, invalid data, boundary conditions |
+| **Responsive Design** | Testing across mobile, tablet, and desktop devices |
 
-- Register a new user and confirm signup toast shows.
-- Log in and out, confirm toasts show for both actions.
-- Create, edit, delete a review and confirm toasts and UI changes for each.
-- Try to edit/delete a review while logged out and confirm you are blocked.
+### Validation Results
 
-### Accessibility & Validation
+#### Accessibility - Lighthouse Scores
 
-- Run Lighthouse (Chrome DevTools) and address any critical accessibility/performance issues.
-- Validate HTML using the Nu HTML Checker (v.Nu) on the main pages.
+| Platform | Screenshot |
+|----------|------------|
+| **Desktop** | ![Lighthouse Desktop](https://github.com/rachel1davey/movie_tracker_django/blob/main/assets/readme/lighthousedesktop.png) |
+| **Mobile** | ![Lighthouse Mobile](https://github.com/rachel1davey/movie_tracker_django/blob/main/assets/readme/lighthousemobile.png) |
 
+#### Code Validation
+
+| Language | Result | Screenshot |
+|----------|--------|------------|
+| **Python (PEP 8)** | ✅ All files pass PEP 8 standards | ![Python Validation](https://github.com/rachel1davey/movie_tracker_django/blob/main/assets/readme/pythontest.png) |
+| **HTML (W3C)** | ✅ All templates validated | ![HTML Validation](https://github.com/rachel1davey/movie_tracker_django/blob/main/assets/readme/htmlcheck.png) |
+| **CSS (W3C)** | ⚠️ Validator doesn't recognize Tailwind utility classes | ![CSS Validation](https://github.com/rachel1davey/movie_tracker_django/blob/main/assets/readme/csscheck.png) |
+
+---
+
+## 🚧 Known Issues & Future Enhancements
+
+### Known Issues
+
+| Issue | Status |
+|-------|--------|
+| CSS Validator warnings for Tailwind utilities | ⚠️ Expected - Tailwind uses custom properties |
+
+### Future Enhancements
+
+| Feature | Priority |
+|---------|----------|
+| Watchlist functionality | High |
+| Movie ratings system | High |
+| Advanced search filters | Medium |
+| Social features (follow users) | Medium |
+| Movie recommendations | Low |
+| Export reviews | Low |
 
 ---
 
 ## 🤖 AI Usage
 
-- AI assisted in generating user stories and debugging.
-- Minimal AI-generated code.
-- Cursor Agent used for Heroku deployment troubleshooting.
+| Usage Area | Description |
+|------------|-------------|
+| **User Stories** | AI assisted in generating and structuring user stories |
+| **Debugging** | Help with troubleshooting complex issues |
+| **Code Generation** | Minimal AI-generated code; core functionality written manually |
+| **Deployment** | Cursor Agent used for Heroku deployment troubleshooting |
+| **Documentation** | AI helped structure README and documentation |
 
 ---
 
-## 🙏 Credits
+## 🙏 Credits & Acknowledgments
 
-- [TMDb API](https://www.themoviedb.org/documentation/api) for movie data.
-- [Django Documentation](https://docs.djangoproject.com/) for backend guidance.
-- [Tailwind CSS](https://tailwindcss.com/) and [DaisyUI](https://daisyui.com/) for frontend styling.
+### APIs & Services
+
+| Service | Purpose | Link |
+|---------|---------|------|
+| TMDB API | Movie data and images | [Documentation](https://www.themoviedb.org/documentation/api) |
+| Cloudinary | Image hosting and management | [Website](https://cloudinary.com/) |
+
+### Frameworks & Libraries
+
+| Technology | Purpose | Link |
+|------------|---------|------|
+| Django | Backend framework guidance | [Documentation](https://docs.djangoproject.com/) |
+| Django Allauth | Authentication system | [Documentation](https://django-allauth.readthedocs.io/) |
+| Tailwind CSS | CSS framework | [Website](https://tailwindcss.com/) |
+| DaisyUI | Component library | [Website](https://daisyui.com/) |
+
+### Resources
+
+| Source | Contribution |
+|--------|--------------|
+| Code Institute | Project guidance and support |
+| Stack Overflow | Community solutions and best practices |
+| Django Community | Framework best practices and patterns |
 
 ---
 
 ## 📄 License
 
-[MIT License](LICENSE)
+This project is licensed under the [MIT License](LICENSE).
 
 ---
 
-*Happy movie tracking!*
+## 📧 Contact
+
+**Live Application:** [https://moviebucketdjango-03c8d5ee1edd.herokuapp.com/](https://moviebucketdjango-03c8d5ee1edd.herokuapp.com/)
+
+**Repository:** [https://github.com/rachel1davey/movie_tracker_django](https://github.com/rachel1davey/movie_tracker_django)
+
+For questions or feedback, please open an issue on the GitHub repository.
 
 ---
 
-
+*Happy movie tracking! 🍿*
