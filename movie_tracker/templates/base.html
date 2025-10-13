@@ -1,6 +1,5 @@
 {% load account %}
-{% load tailwind_tags %} 
-{% tailwind_css %}
+{% load tailwind_tags %}
 {% load static %}
 
 <!DOCTYPE html>
@@ -63,7 +62,8 @@
         }
     }
     </style>
-    {# tailwind_css above injects the compiled CSS at /static/css/dist/styles.css; avoid duplicating/mis-pathing by not hard-coding a theme/... path here #}
+    {% tailwind_css %}
+    {# tailwind_css injects the compiled CSS at /static/css/dist/styles.css; avoid duplicating/mis-pathing by not hard-coding a theme/... path here #}
 
 </head>
 <body class="relative min-h-screen bg-[#020617] text-white">
