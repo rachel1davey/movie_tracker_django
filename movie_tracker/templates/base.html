@@ -101,9 +101,7 @@
                    placeholder="Search movies..."
                    class="input input-sm input-bordered"
                   value="{{ request.GET.query }}">
-                  <button type="submit" class="btn btn-sm btn-primary w-12"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-</svg>
+                  <button type="submit" class="btn btn-sm btn-primary w-12">
 Search
 </button>
                 </form>
@@ -139,14 +137,16 @@ Search
         {% block content %}{% endblock %}
     </main>
 
-    <footer class="bg-secondary text-primary-content py-6 mt-auto text-black">
+        <footer class="bg-secondary py-6 mt-auto">
         <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
-            <p class="text-sm">&copy; 2025 MovieBucket. All rights reserved.</p>
-            <div class="flex gap-4 mt-2 md:mt-0">
-                <a href="#" class="hover:text-secondary">About</a>
-                <a href="#" class="hover:text-secondary">Contact</a>
-                <a href="#" class="hover:text-secondary">Privacy</a>
-            </div>
+                <p class="text-sm text-gray-300">&copy; 2025 MovieBucket. All rights reserved.</p>
+                <nav aria-label="Footer navigation">
+                  <div class="flex gap-4 mt-2 md:mt-0">
+                      <a href="#" class="text-gray-300 hover:text-white">About</a>
+                      <a href="#" class="text-gray-300 hover:text-white">Contact</a>
+                      <a href="#" class="text-gray-300 hover:text-white">Privacy</a>
+                  </div>
+                </nav>
         </div>
     </footer>
 
