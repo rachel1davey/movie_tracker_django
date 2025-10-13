@@ -1,31 +1,40 @@
 import requests
+
 from django.conf import settings
-from django.shortcuts import render, redirect, get_object_or_404
-from .models import Review
-from .forms import ReviewForm
-from django.db import models
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.db import models
+
+from .forms import ReviewForm
+from .models import Review
+
 
 # Create your views here.
 
+
 def movie_detail(request, movie_id):
-    # fetch movie details from TMDB API
+    """Show a movie detail page with reviews and average rating."""
+
+    # Fetch movie details from TMDb API.
     url = f"https://api.themoviedb.org/3/movie/{movie_id}"
-    params = {"api_key": settings.TMDB_API_KEY, "language": "en-US"}
+    params = {
+        "api_key": settings.TMDB_API_KEY,
+        "language": "en-US",
+    }
     response = requests.get(url, params=params)
-    
+
     movie = response.json() if response.status_code == 200 else None
-    
-    # get all reviews for this movie
+
+    # Get all reviews for this movie.
     reviews = Review.objects.filter(movie_id=movie_id).select_related("author")
-    
-    # check if the user already has a review
+
+    # Check if the current user already has a review.
     user_review = None
     if request.user.is_authenticated:
         user_review = reviews.filter(author=request.user).first()
-    
-    # handle review submission
+
+    # Handle review submission.
     if request.method == "POST" and request.user.is_authenticated:
         form = ReviewForm(request.POST)
         if form.is_valid():
@@ -38,11 +47,10 @@ def movie_detail(request, movie_id):
     else:
         form = ReviewForm()
 
-    # average rating for movie page
+    # Average rating for movie page.
     avg_rating = reviews.aggregate(models.Avg("rating"))["rating__avg"]
 
     avg_rating_name = None
-
     if avg_rating is not None:
         if avg_rating < 2:
             avg_rating_name = "Mostly Negative"
@@ -62,6 +70,7 @@ def movie_detail(request, movie_id):
         "form": form,  # pass form to template
         "movie_id": movie_id,
     }
+
     return render(request, "movies/movie_detail.html", context)
 
 
@@ -82,6 +91,7 @@ def edit_review(request, review_id):
         "form": form,
         "review": review,
     }
+
     return render(request, "movies/edit_review.html", context)
 
 

@@ -141,6 +141,43 @@ Project board link: [PROJECT BOARD LINK]
 
 - [Add deployment instructions here, e.g., Heroku, Vercel, etc.]
 
+### Heroku (Tailwind) notes
+
+If you deploy to Heroku and use the Tailwind build pipeline, make sure the compiled CSS is produced during slug compilation so `collectstatic` can include it. Two common approaches:
+
+1) Multi-buildpack (recommended)
+
+    - Add the Node.js buildpack before the Python buildpack so npm runs first and outputs compiled CSS into `theme/static/css/dist`:
+
+        ```bash
+        heroku buildpacks:clear
+        heroku buildpacks:add --index 1 heroku/nodejs
+        heroku buildpacks:add --index 2 heroku/python
+        ```
+
+    - In `theme/static_src/package.json` ensure `build` script runs PostCSS/Tailwind and writes to `../static/css/dist/styles.css` (this repo already includes that script).
+
+    - Add a `heroku-postbuild` script in the root `package.json` (or in the theme package.json) to run the Tailwind build during slug compile.
+
+2) Pre-build locally and commit compiled assets (quick, less ideal)
+
+    - Run `npm run build` in `theme/static_src` locally and commit the generated `theme/static/css/dist/styles.css` to the repository. This avoids needing Node in the Heroku build but increases repo size and maintenance burden.
+
+3) Ensure `collectstatic` runs during build
+
+    - If you previously disabled collectstatic on Heroku, unset that setting:
+
+        ```bash
+        heroku config:unset DISABLE_COLLECTSTATIC
+        ```
+
+After deployment, verify these URLs on your live site return the correct content-type (not HTML):
+
+- `/static/css/dist/styles.css` — should return text/css
+- `/static/js/toasts.js` — should return application/javascript
+
+If you want, I can add a small `heroku-postbuild` script example or commit the compiled CSS for you.
+
 ### Environment & Deployment notes
 
 - Create a `.env` file for local development (do NOT commit it). Add a `.env.example` to the repo with placeholders.
