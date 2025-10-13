@@ -6,6 +6,9 @@ import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Project root (one level above the inner package dir). Useful for referencing theme/ and top-level static dirs.
+PROJECT_ROOT = BASE_DIR.parent
+
 # ----------------------
 # Environment
 # ----------------------
@@ -156,8 +159,8 @@ USE_TZ = True
 # Static files
 # ----------------------
 STATICFILES_DIRS = [
-    BASE_DIR / "theme" / "static",             # Tailwind compiled CSS
-    BASE_DIR / "movie_tracker" / "static",     # fallback
+    PROJECT_ROOT / "theme" / "static",             # Tailwind compiled CSS (project root)
+    PROJECT_ROOT / "movie_tracker" / "static",     # fallback (project root)
 ]
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
