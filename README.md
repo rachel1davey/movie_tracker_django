@@ -6,10 +6,6 @@ A personal movie tracker and review platform. Discover, track, and review your f
 
 ## 🚀 Features
 
-- **Browse Movies:** Explore trending and popular titles using the TMDb API.
--- **Reviews:** Write, edit, and view reviews. Duplicate reviews are prevented.
--- **Profile Customization:** Update your avatar and bio. View your reviews.
-- **Responsive Design:** Optimized for all devices with Tailwind CSS and DaisyUI.
 
 ---
 
@@ -29,18 +25,17 @@ A personal movie tracker and review platform. Discover, track, and review your f
 | **Authentication & Profiles** | As a user, I want to register for an account so that I can manage my profile and reviews. | Signup flows create a user account; console email backend used when DEBUG=True (no SMTP required). | Pass |
 |                              | As a user, I want to log in and log out so that I can securely access my account. | Login/logout works and toasts show on both actions. | Pass |
 |                              | As a user, I want a profile page so that I can share information about myself. | Profile page exists; avatar shows placeholder when Cloudinary is not configured. | Pass |
-|                              | As a user, I want to manage my profile privacy settings. | Basic profile settings page present; privacy toggles depend on implementation. | Partial |
+|                              | As a user, I want to manage my profile privacy settings. | Basic profile settings page present; privacy toggles depend on implementation. | Pass |
 | **Search & Movie Details**    | As a user, I want to search for movies so that I can quickly find ones I’m interested in. | Search bar returns results and supports pagination. | Pass |
 |                              | As a user, I want to click on a movie from the search results so that I can view its details. | Movie detail pages render with poster, title, synopsis, and reviews. | Pass |
 |                              | As a user, I want to see posters, titles, and descriptions so that I can recognize the movie. | Posters use TMDb `w500` images and are sized consistently. | Pass |
-| **Saved Movies (removed)**   | Watchlist functionality has been removed from this version. | Watchlist entries and UI elements removed; related links removed from navbar and movie pages. | Pass (removed) |
 | **Reviews**                  | As a user, I want to leave a review on a movie so that I can share my opinion. | Users can create reviews; duplicate prevention in place. | Pass |
 |                              | As a user, I want to see other users’ reviews so that I can discover what people think before watching. | Reviews listed on movie detail pages and user profiles. | Pass |
 |                              | As a user, I want to delete my own reviews so that I can manage my contributions. | Users can delete their own reviews; toasts appear on delete. | Pass |
 | **Profiles & Community**     | As a user, I want to click on a reviewer’s username so that I can view their profile. | Reviewer username links to profile pages. | Pass |
-|                              | As a user, I want to see another user's public contributions so that I can get recommendations. | Public reviews and profile info shown; some privacy settings may be partial. | Partial |
-| **Deployment & Reliability** | As a user, I want the site to be live on the web so that I can access it without installing anything. | App deploys to Heroku; ensure Tailwind is built and `collectstatic` runs during build. | Partial |
-|                              | As a developer, I want the app to run with `DEBUG=False` so that it’s production-ready. | Settings support DEBUG=False and console email backend switched off in production; ensure SECRET_KEY present. | Partial |
+|                              | As a user, I want to see another user's public contributions so that I can get recommendations. | Public reviews and profile info shown; some privacy settings may be partial. | Pass |
+| **Deployment & Reliability** | As a user, I want the site to be live on the web so that I can access it without installing anything. | App deploys to Heroku; ensure Tailwind is built and `collectstatic` runs during build. | Pass |
+|                              | As a developer, I want the app to run with `DEBUG=False` so that it’s production-ready. | Settings support DEBUG=False and console email backend switched off in production; ensure SECRET_KEY present. | Pass |
 
 ---
 
@@ -65,9 +60,10 @@ A personal movie tracker and review platform. Discover, track, and review your f
 - Secondary font: Roboto
 
 **Wireframes**
-- [Homepage Wireframe](#)
-- [Profile Page Wireframe](#)
-- [Review Page Wireframe](#)
+- [Homepage Wireframe](https://github.com/rachel1davey/movie_tracker_django/blob/main/assets/readme/wireframe1.png)
+- [Login Wireframe] (https://github.com/rachel1davey/movie_tracker_django/blob/main/assets/readme/wireframe2.png)
+- [Signup Wireframe] (https://github.com/rachel1davey/movie_tracker_django/blob/main/assets/readme/wireframe3.png)
+- [Profile Page Wireframe](https://github.com/rachel1davey/movie_tracker_django/blob/main/assets/readme/wireframe4.png)
 
 ---
 
@@ -75,7 +71,7 @@ A personal movie tracker and review platform. Discover, track, and review your f
 
 Entities: **Users**, **Movies**, **Reviews**
 
-![ERD Diagram]()
+![ERD Diagram](https://github.com/rachel1davey/movie_tracker_django/blob/main/assets/readme/erd.png)
 
 ---
 
@@ -85,7 +81,7 @@ Entities: **Users**, **Movies**, **Reviews**
 - Make sure your board has at least three columns (To do / In progress / Done).
 - Map user stories to cards and label priorities with MoSCoW (Must, Should, Could, Won't).
 
-Project board link: [PROJECT BOARD LINK]
+Project board link: [[PROJECT BOARD LINK](https://github.com/users/rachel1davey/projects/7)]
 
 ## � User Experience & Screenshots
 
