@@ -79,7 +79,24 @@ Entities: **Users**, **Movies**, **Reviews**
 
 ---
 
-## 🏗️ Methodology
+## 📌 Project Board & Planning
+
+- Add a public GitHub Project board and paste the link here (e.g. https://github.com/<you>/<repo>/projects/1)
+- Make sure your board has at least three columns (To do / In progress / Done).
+- Map user stories to cards and label priorities with MoSCoW (Must, Should, Could, Won't).
+
+Project board link: [PROJECT BOARD LINK]
+
+## � User Experience & Screenshots
+
+- Document main user journeys (signup → profile → review; login → search → review actions).
+- Add screenshots (place in `docs/screenshots/`):
+    - `docs/screenshots/homepage.png`
+    - `docs/screenshots/profile.png`
+    - `docs/screenshots/movie_detail.png`
+
+
+## �🏗️ Methodology
 
 - **Agile Development:** Iterative sprints with regular feedback.
 - **Continuous Testing:** Manual and automated tests for reliability.
@@ -124,6 +141,22 @@ Entities: **Users**, **Movies**, **Reviews**
 
 - [Add deployment instructions here, e.g., Heroku, Vercel, etc.]
 
+### Environment & Deployment notes
+
+- Create a `.env` file for local development (do NOT commit it). Add a `.env.example` to the repo with placeholders.
+- Required environment variables (example):
+    - SECRET_KEY=your-secret-key
+    - DEBUG=True
+    - TMDB_API_KEY=your-tmdb-api-key
+    - DATABASE_URL=sqlite:///db.sqlite3 (or your production DB URL)
+    - EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend
+
+- For production:
+    - Set `DEBUG=False` and ensure a secure `SECRET_KEY` is set through environment variables.
+    - Configure database and static/media storage (Postgres, Cloudinary, etc.)
+    - Collect static files and use a WSGI server like Gunicorn.
+
+
 ---
 
 ## 🧪 Testing
@@ -131,6 +164,19 @@ Entities: **Users**, **Movies**, **Reviews**
 - Manual and automated unit tests.
 -- Edge case validation for reviews.
 - Responsive UI testing across devices.
+
+### Quick manual testing checklist
+
+- Register a new user and confirm signup toast shows.
+- Log in and out, confirm toasts show for both actions.
+- Create, edit, delete a review and confirm toasts and UI changes for each.
+- Try to edit/delete a review while logged out and confirm you are blocked.
+
+### Accessibility & Validation
+
+- Run Lighthouse (Chrome DevTools) and address any critical accessibility/performance issues.
+- Validate HTML using the Nu HTML Checker (v.Nu) on the main pages.
+
 
 ---
 
@@ -157,3 +203,18 @@ Entities: **Users**, **Movies**, **Reviews**
 ---
 
 *Happy movie tracking!*
+
+---
+
+## ✅ Pre-submission checklist
+
+1. Remove any hard-coded secrets from settings (no SECRET_KEY fallbacks).
+2. Create `.env.example` and ensure `.env` is in `.gitignore`.
+3. Ensure `DEBUG=False` in production and document this in deployment steps.
+4. Run HTML and CSS validators and fix reported errors.
+5. Run Lighthouse accessibility & performance checks and address critical issues.
+6. Ensure the GitHub Project board is public and linked above.
+7. Add screenshots to `docs/screenshots/` and reference them in the README.
+8. Confirm toasts/messages appear for signup/login/logout and review create/edit/delete flows.
+
+If you want, I can create `.env.example`, run the validators and provide a report of issues to fix.
