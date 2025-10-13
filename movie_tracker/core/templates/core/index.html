@@ -50,7 +50,7 @@
         <a href="?query={{ query }}&page={{ page_obj.previous_page_number }}" class="px-3 py-1 rounded-md bg-gray-700 text-white hover:bg-gray-600">&larr; Previous</a>
       {% endif %}
 
-      <span class="px-3 py-1 rounded-md bg-transparent text-sm text-gray-300">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+  <span class="px-3 py-1 rounded-md bg-transparent text-sm text-primary-content">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
 
       {% if page_obj.has_next %}
         <a href="?query={{ query }}&page={{ page_obj.next_page_number }}" class="px-3 py-1 rounded-md bg-gray-700 text-white hover:bg-gray-600">Next &rarr;</a>
