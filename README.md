@@ -75,7 +75,7 @@ A personal movie tracker and review platform. Discover, track, and review your f
 
 Entities: **Users**, **Movies**, **Reviews**
 
-![ERD Diagram](#)
+![ERD Diagram]()
 
 ---
 
@@ -206,15 +206,4 @@ Project board link: [PROJECT BOARD LINK]
 
 ---
 
-## ✅ Pre-submission checklist
 
-1. Remove any hard-coded secrets from settings (no SECRET_KEY fallbacks).
-2. Create `.env.example` and ensure `.env` is in `.gitignore`.
-3. Ensure `DEBUG=False` in production and document this in deployment steps.
-4. Run HTML and CSS validators and fix reported errors.
-5. Run Lighthouse accessibility & performance checks and address critical issues.
-6. Ensure the GitHub Project board is public and linked above.
-7. Add screenshots to `docs/screenshots/` and reference them in the README.
-8. Confirm toasts/messages appear for signup/login/logout and review create/edit/delete flows.
-
-If you want, I can create `.env.example`, run the validators and provide a report of issues to fix.
